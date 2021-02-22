@@ -57,8 +57,12 @@
                     />
               </div>
                 <vue-tel-input defaultCountry="NG"
-                               :disabledFetchingCountry="true" class="no-outline placeholder-gray-500 border-gray-500 border-2 w-full p-4 my-4 bg-white focus:outline-none" v-model="phone"></vue-tel-input>
-
+                               :disabledFetchingCountry="true" class="no-outline placeholder-gray-500 border-gray-500 border-2 w-full p-4 my-4 bg-white focus:outline-none" v-model="phone">
+                </vue-tel-input>
+              <div>
+                <h6 for="" class="text-muted" style="color: grey">Bussines Category</h6>
+                <v-select :options="selectOptions" v-model="category" className="p-4" style="height: 40px" />
+              </div>
 
               <google-places-autocomplete
                   @resultChanged="placeDetail => place = placeDetail"
@@ -74,7 +78,7 @@
                       @keydown.up.prevent="actions.unshiftResultsSelection"
                       type="search"
                       id="locationInput"
-                      class="text-sm md:text-base focus:bg-white placeholder-gray-600 border-gray-500 border-2 w-full p-4 my-4 focus:outline-none"
+                      class="text-sm md:text-base focus:bg-white placeholder-gray-600 border-gray-500 border-2 w-full p-4 my-4 mt-10 focus:outline-none"
                       placeholder="Enter Address"
                       autocomplete="on"
                   >
@@ -144,7 +148,16 @@ name: "Register",
       phone: "",
       password: "",
       errors: [],
-      loading: false
+      loading: false,
+      category: "",
+      selectOptions: [
+        "Clothings",
+        "Computer Accessories",
+        "Documents",
+        "Electronics",
+        "Food",
+        "Health Products",
+      ],
     }
   },
   methods: {
@@ -162,6 +175,7 @@ name: "Register",
         this.isGraterThan(this.password, 8, 'Password'),
         this.isNotEmpty(this.fname,"First Name"),
         this.isNotEmpty(this.lname,"Last Name"),
+        this.isNotEmpty(this.category,"Category"),
         this.isEmail(this.email),
         this.locationCheck()
       ];
@@ -174,6 +188,7 @@ name: "Register",
           "email": this.email,
           "password": this.password,
           "password_confirmation": this.password,
+          "business_category": this.category,
           "user_type": "customer",
           "telephone": '234' + this.phone.replace(/\s/g, ''),
           "name": `${this.fname} ${this.lname}`,
@@ -221,7 +236,10 @@ name: "Register",
   }
 }
 
-
+.vs__search {
+  padding: 0.8rem 3rem !important;
+  cursor: pointer !important;
+}
 
 .loader {
   border: 16px solid #f3f3f3;
