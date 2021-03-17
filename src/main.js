@@ -43,6 +43,8 @@ Vue.use(VueLoaders);
 
 Vue.use(VueTelInput)
 
+Vue.use(require("moment"));
+
 library.add(faUserSecret, faStar)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

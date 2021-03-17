@@ -6,15 +6,27 @@
       <router-link :to="{ name: 'dashboard' }">
         <img src="../assets/images/swift-logo.png" alt="Lernen Logo" class="object-contain w-32"/>
       </router-link>
-
     </div>
 
     <div class="header__nav hidden lg:block ml-auto">
       <ul class="list-none">
-        <li class="inline-block mr-10">
+<!--        <li class="inline-block mr-10">
           <router-link :to="{ name: 'profile' }" class="text-xl md:text-xl lg:text-xl font-bold text-left pt-5" style="color: white">
             Hello {{firstName}}
           </router-link>
+        </li>-->
+        <li class="inline-block mr-10">
+          <div class="dropdown inline-block relative">
+            <button class="font-bold py-2 px-4 lg:text-xl rounded inline-flex items-center">
+              <span class="mr-1"  style="color: white">Hello {{firstName}}</span>
+              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
+            </button>
+            <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
+              <li class=""><router-link :to="{ name: 'history'}" class="rounded-t bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Delivery History</router-link ></li>
+              <li class=""><router-link :to="{ name: 'ticket'}" class="bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Raise a ticket</router-link ></li>
+              <li class=""><router-link :to="{ name: 'track'}" class="rounded-b bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Track Order</router-link ></li>
+            </ul>
+          </div>
         </li>
         <li class="inline-block">
           <h5 @click="logout" class="text-xl md:text-xl lg:text-xl font-bold text-left pt-5" style="color: white; cursor: pointer">
@@ -95,8 +107,21 @@
             <ul>
               <li class="inline-block mr-10">
                 <router-link :to="{ name: 'profile' }" class="hover:bg-nav-link px-6 py-3 w-48 flex justify-center items-center mt-2 rounded text-black hover:text-primary-green text-center text-xl md:text-xl lg:text-xl font-bold ">
-                  Hello {{firstName}}
+                  Ho {{firstName}}
                 </router-link>
+              </li>
+              <li class="inline-block mr-10">
+                <div class="dropdown inline-block relative">
+                  <button class="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
+                    <span class="mr-1">Dropdown</span>
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
+                  </button>
+                  <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
+                    <li class=""><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">One</a></li>
+                    <li class=""><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Two</a></li>
+                    <li class=""><a class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Three is the magic number</a></li>
+                  </ul>
+                </div>
               </li>
               <li class="inline-block">
                 <h5 @click="logout" class="hover:bg-nav-link px-6 py-3 w-48 flex justify-center items-center mt-2 rounded text-black hover:text-primary-green text-center text-xl md:text-xl lg:text-xl " style="cursor: pointer">
@@ -396,4 +421,9 @@ img {
 header {
   height: 50%;
 }
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
 </style>

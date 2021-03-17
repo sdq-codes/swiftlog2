@@ -2,11 +2,73 @@
   <div id="everything">
     <Header :name="name" />
     <div class="address mt-16 flex justify-center">
+      <div @click="step = step - 1" v-if="step > 0 & step < 6" class="arrow-back flex justify-content-center px-5">
+        <img src="../assets/images/arrow-back-outline.svg" alt="">
+      </div>
+      <div @click="rerendet" v-else-if="step === 6" class="arrow-back flex justify-content-center px-5">
+        <img src="../assets/images/arrow-back-outline.svg" alt="">
+      </div>
+      <div @click="$router.go(-1)" v-else class="arrow-back flex justify-content-center px-5">
+        <img src="../assets/images/arrow-back-outline.svg" alt="">
+      </div>
       <div class="lg:w-custom md:w-2/6 lg:w-2/10 px-0" style="overflow-y: scroll">
         <article
             class="text-white text-left rounded-lg p-0 pb-8"
             style="background-color: white; color: black; cursor: default"
         >
+          <div v-show="step === 0" class="p-4">
+            <h6 class="text-center pt-5">Select Option</h6>
+            <h6 class="text-center text-sm mt-1 mb-5 font-light">I am the</h6>
+            <div class="block inline-flex w-full bg-gray-100 p-4 rounded-b" style="border-radius: 15px">
+              <img src="../assets/images/sender.svg" alt="">
+              <div class="block w-full">
+                <div  class="flex w-full space-between p-2 rounded-b pb-0" >
+                  <h6 class="mr-auto text-lg font-normal" style="color: #353B50">Sender</h6>
+                  <input type="radio" v-model="deliveryType" value="sender" class="ml-auto">
+                </div>
+                <div  class="flex w-full space-between mb-4 p-2 rounded-b">
+                  <h6 class="mr-auto text-sm font-normal" style="color: #353B50">
+                    The dispatch rider will be picking up package from me
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="block inline-flex w-full bg-gray-100 p-4 rounded-b mt-5"  style="border-radius: 15px">
+              <img src="../assets/images/receiver.svg" alt="">
+              <div class="block w-full">
+                <div  class="flex w-full space-between p-2 rounded-b pb-0" >
+                  <h6 class="mr-auto text-lg font-normal" style="color: #353B50">Receiver</h6>
+                  <input type="radio" v-model="deliveryType" value="receiver" class="ml-auto">
+                </div>
+                <div  class="flex w-full space-between mb-4 p-2 rounded-b">
+                  <h6 class="mr-auto text-sm font-normal" style="color: #353B50">
+                    The dispatch rider will be delivering package from me
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="block inline-flex w-full bg-gray-100 p-4 rounded-b mt-5"  style="border-radius: 15px">
+              <img src="../assets/images/third.svg" alt="">
+              <div class="block w-full">
+                <div  class="flex w-full space-between p-2 rounded-b pb-0" >
+                  <h6 class="mr-auto text-lg font-normal" style="color: #353B50">Third Party</h6>
+                  <input type="radio" v-model="deliveryType" value="third" class="ml-auto">
+                </div>
+                <div  class="flex w-full space-between mb-4 p-2 rounded-b">
+                  <h6 class="mr-auto text-sm font-normal" style="color: #353B50">
+                    I am placing the order on someone’s behalf
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <button
+                class="btn-secondary py-3 w-full mt-5 font-medium"
+                style="background-color: #64245C; color: white; border-radius: 10px"
+                @click="deliveryTypeChoose"
+            >
+              Next
+            </button>
+          </div>
           <div v-show="step === 1 ">
             <article
                 class="text-white text-left pb-5 rounded-lg px-8 pb-6 pt-6"
@@ -220,7 +282,12 @@
               <label for="s2"
                      style="font-family: 'Airbnb Cereal App Light'; font-size: 20px;"
                      class="mr-auto">Is the item fragile?</label>
-              <input id="s2" type="checkbox" class="switch ml-auto" style="float: right" v-model="fragile">
+              <input id="s2" type="checkbox" class="switch ml-auto mb-5" style="float: right" v-model="fragile">
+              <textarea
+                  placeholder="Additional Note"
+                  name="" id="" rows="7" v-model="addNote" style="width: 100%; margin-top: 0.7rem; padding: 1rem" class="">
+
+              </textarea>
               <h5
                   class="font-bold text-center text-base mb-3 btn-secondary mt-6 ml-auto w-12/12 py-3 font-medium"
                   style="background-color: #80C050; color: white; border-radius: 10px; cursor: pointer"
@@ -302,16 +369,16 @@
                 class="text-white text-left pb-5 rounded-lg px-8 pb-0 pt-2 justify-center"
                 style="background-color: white; color: black; cursor: default;"
             >
-              <h2
-                  style="font-family: 'Airbnb Cereal App Bold'; font-size: 34px; line-height: 44px;"
-                  class="font-bold text-center mt-3 mb-6">Success</h2>
-              <img src="../assets/images/success.svg" alt="" width="80%" class="ml-auto mr-auto">
+              <h5
+                  style="font-family: 'Airbnb Cereal App Bold'; font-size: 1.3rem; line-height: 44px;"
+                  class="text-center mt-3 mb-6">Searching for dispatch</h5>
+              <img src="../assets/images/cancelRide.svg" alt="" width="64px" class="ml-auto mr-auto">
               <h6
                   style="font-family: 'Airbnb Cereal App Medium'; font-size: 18px; font-weight: 500; cursor: pointer"
                   class="text-center mt-10"
                 @click="rerendet"
               >
-                Tap here to continue
+                Cancel search
               </h6>
             </article>
           </div>
@@ -356,7 +423,8 @@ name: "Dashboard",
         lat: null,
         lng: null
       },
-      step: 1,
+      step: 0,
+      deliveryType: "",
       coordinates: {
         0: {
           full_name: 'Default Location',
@@ -380,6 +448,7 @@ name: "Dashboard",
       },
       editPrevioudDestination: false,
       destination: [],
+      order: [],
       place: [],
       placeVicinity: '',
       addressText: '',
@@ -391,6 +460,7 @@ name: "Dashboard",
       loading: false,
       receipientName: "",
       receipientTel: "",
+      addNote: "",
       category: "",
       calender: null,
       schedule: false,
@@ -428,6 +498,38 @@ name: "Dashboard",
       }
       this.getRecent();
     },
+    deliveryTypeChoose() {
+      if (this.deliveryType === "") {
+        this.$swal(
+            "You have to choose a delivery type",
+            "",
+            "error"
+        )
+      } else {
+        console.log(this.deliveryType)
+        if (this.deliveryType === "sender") {
+          this.started();
+          this.editPickUp = false;
+          this.editPrevioudDestination = false;
+          this.destination = {};
+        } else if (this.deliveryType === "receiver") {
+          this.changeEdit();
+          const addressText = JSON.parse(localStorage.getItem('user')).address_text.split(",");
+          this.destination = {};
+          this.destination.vicinity = addressText[1].trim();
+          this.destination.geometry = {};
+          this.destination.geometry.location = [];
+          this.destination.geometry.location.lat = 2.4343;
+          this.destination.geometry.location.lng = 2.4343;
+          this.destination.formatted_address = JSON.parse(localStorage.getItem('user')).address_text;
+          this.destination.formatted_address = JSON.parse(localStorage.getItem('user')).address_text;
+          this.editPrevioudDestination = true;
+        } else if (this.deliveryType === "third") {
+          this.changeEdit();
+        }
+        this.step = 1;
+      }
+    },
     changePreviousDestinationEdit() {
       if (this.editPrevioudDestination) {
         this.destination = []
@@ -435,12 +537,18 @@ name: "Dashboard",
       this.editPrevioudDestination = !this.editPrevioudDestination;
     },
     rerendet() {
+      if (this.step === 6) {
+        httpClient.put(`orders/${this.order.id}`, {
+          status: "cancelled"
+        })
+      }
       this.name= ""
+      this.deliveryType = ""
       this.startLocation= {
         lat: null,
         lng: null
       },
-      this.step= 1,
+      this.step= 0;
       this.coordinates = {
         0: {
           full_name: 'Default Location',
@@ -502,15 +610,19 @@ name: "Dashboard",
           pickup: this.calender
         }
       }
-      dataForm['order_destinations'] = {
+      console.log(this.destination);
+      dataForm['order_destinations'] = [{
         destination: this.destination,
         recipient_name: this.receipientName,
         recipient_telephone: this.receipientTel,
         category: this.category,
-        fragile: this.fragile
-      };
+        fragile: this.fragile,
+        address_lat: this.addNote,
+      }];
+      console.log(dataForm);
       httpClient.post('orders', dataForm)
-      .then(() => {
+      .then((response) => {
+        this.order = response.data.data.order;
         this.step = 6;
         let text = "";
         let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -1191,6 +1303,19 @@ header {
   input[type=radio]:checked {
     --s: .5;
   }
+}
+
+textarea {
+  border: 1px solid #f3f3f3;
+}
+
+.arrow-back {
+  position: relative;
+  left: -5rem;
+  background-color: white;
+  height: 72px;
+  border-radius: 50%;
+  box-shadow: 0px 6.27323px 25.0929px rgba(96, 100, 112, 0.1);
 }
 
 </style>

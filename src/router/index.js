@@ -12,6 +12,9 @@ const ForgetPassword = () => import('../Views/ForgetPassword')
 const Register = () => import('../Views/Register')
 const Dashboard = () => import('../Views/Dashboard')
 const ProfilePage = () => import('../Views/ProfilePage')
+const OrderHistory = () => import('../Views/OrderHistory')
+const Ticket = () => import('../Views/Ticket')
+const Track = () => import('../Views/Track')
 const Verification = () => import('../Views/Verification')
 
 Vue.use(VueRouter)
@@ -70,6 +73,30 @@ const routes = [
     path: '/profile',
     component: ProfilePage,
     name: 'profile',
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/history',
+    component: OrderHistory,
+    name: 'history',
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/ticket',
+    component: Ticket,
+    name: 'ticket',
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/track',
+    component: Track,
+    name: 'track',
     meta: {
       requireAuth: true
     }
