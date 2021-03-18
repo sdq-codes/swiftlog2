@@ -48,4 +48,12 @@ class UserController extends Controller {
         ]);
         return $this->userManagement->updatePassword($request->all());
     }
+
+    public function admin() {
+        return response()->created(
+            "Successfully created coupons",
+            User::where("user_type", "admin")->get(),
+            "admins"
+        );
+    }
 }

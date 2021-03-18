@@ -21,6 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('telephone');
             $table->string('business_category');
             $table->string('address_text')->nullable();
+            $table->string('image_url')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('position')->nullable();
             $table->string('address_latitude')->nullable();
             $table->string('address_longitude')->nullable();
             $table->enum('user_type', ['admin','super_admin','rider','customer'] );

@@ -25,4 +25,9 @@ class SmsAdapter extends BaseFactory implements SmsAdapterInterface
         $message = "Welcome to SWIFT LOGISTICS. Your verification otp is $otp.";
         $this->smsService->sendSms($message, $user->telephone);
     }
+
+    public function sendPassword(string $password, User $user) {
+        $message = "Welcome to SWIFT LOGISTICS. Your password is $password.";
+        $this->smsService->sendSms($message, $user->telephone);
+    }
 }

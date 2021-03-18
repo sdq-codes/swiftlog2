@@ -33,12 +33,14 @@ class UserManagement {
 
     public function __construct(
         UserRepositoryInterface $userRepository,
-        OtpRepositoriesInterface $otpRepositories
+        OtpRepositoriesInterface $otpRepositories,
+        SmsAdapterInterface $smsAdapter
     ) {
         $this->user = new User();
         $this->auth = Auth::guard('api');
         $this->userRepository = $userRepository;
         $this->otpRepositories = $otpRepositories;
+        $this->smsAdapter = $smsAdapter;
     }
     protected function otp(object $user):void {
         $otp = generateRandomstring(4);
@@ -52,6 +54,11 @@ class UserManagement {
 
     public function register($data) {
         $user = null;
+        $person = null;
+        if ($data['user_type'] === 'admin') {
+            $data['password'] = generateRandomstring(10);
+            $person = $data['password'];
+        }
         $data['password'] = Hash::make($data['password']);
         DB::transaction(function () use (&$user,$data){
             $user = $this->userRepository->create($data);
@@ -60,9 +67,33 @@ class UserManagement {
             $this->otp($user);
         });
         $resource = new UserResource($user);
+        if ($data['user_type'] === 'admin') {
+            $this->smsAdapter->sendPassword($person, $user);
+        }
         return response()->fetch(
             "Registration  Successful",
             $resource,
+            'user'
+        );
+    }
+
+    public function registerMemeber($data) {
+        $user = null;
+        $person = null;
+        if ($data['user_type'] === 'admin') {
+            $data['password'] = generateRandomstring(10);
+            $person = $data['password'];
+        }
+        $data['password'] = Hash::make($data['password']);
+        DB::transaction(function () use (&$user,$data){
+            $user = $this->userRepository->createMember($data);
+        });
+        if ($data['user_type'] === 'admin') {
+            $this->smsAdapter->sendPassword($person, $user);
+        }
+        return response()->fetch(
+            "Registration  Successful",
+            $user,
             'user'
         );
     }

@@ -49,6 +49,16 @@ class AuthController extends Controller
             'address_latitude', 'address_longitude']));
     }
 
+    public function registerMember(Request $request){
+        $this->validate($request,[
+            'email' => 'required|email|unique:users',
+            'name' => 'required|string',
+            'telephone' => 'required|numeric|unique:users',
+            'user_type' => 'required',
+        ]);
+        return $this->userManagement->registerMemeber($request->all());
+    }
+
     public function userVerification(Request $request){
         $this->validate($request,[
             'otp' => 'required'

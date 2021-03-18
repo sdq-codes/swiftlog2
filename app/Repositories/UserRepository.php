@@ -40,6 +40,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface {
         ]);
     }
 
+    public function createMember(array $data): User
+    {
+        return $this->model->create($data);
+    }
+
     public function findById(string $id): ?User {
         return $this->model->whereId($id)->first();
     }

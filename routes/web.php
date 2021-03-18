@@ -13,6 +13,8 @@ Route::group(['prefix' => 'api/v1'],function () {
     Route::group(['prefix' => 'authentication'],function (){
         Route::post('/login','Auth\AuthController@login');
         Route::post('/register','Auth\AuthController@register');
+        Route::post('/register/member','Auth\AuthController@registerMember');
+        Route::post('/member','Auth\AuthController@registerMember');
         Route::post('/password/reset/mail','Auth\AuthController@resetPasswordMail');
         Route::post('/mail/resend','Auth\AuthController@resendVerification');
         Route::get('token', 'Auth\AuthController@checkToken');
@@ -34,6 +36,7 @@ Route::group(['prefix' => 'api/v1'],function () {
         Route::put('/password/reset','Auth\AuthController@passwordReset');
         Route::group(['prefix' => 'user'], function () {
             Route::get('count/{userType}', 'UserController@count');
+            Route::get('admin', 'UserController@admin');
             Route::post('all', 'UserController@users');
             Route::post('profile', 'UserController@update');
             Route::post('block', 'UserController@block');
@@ -55,6 +58,12 @@ Route::group(['prefix' => 'api/v1'],function () {
             Route::get('', 'TicketController@todoAll');
             Route::get('{todoId}', 'TicketController@deleteTo');
             Route::get('/star/{todoId}', 'TicketController@starTod');
+        });
+
+        Route::group(['prefix' => 'coupon'], function () {
+            Route::post('', 'CouponController@create');
+            Route::get('', 'CouponController@all');
+            Route::post('{couponId}', 'CouponController@edit');
         });
 
         Route::group(['prefix' => 'ticket'], function () {

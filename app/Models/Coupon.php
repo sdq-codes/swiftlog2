@@ -11,4 +11,8 @@ class Coupon extends Model
     use UuidGenerator;
 
     protected $guarded = [];
+
+    protected $casts = [
+        'expiry_date'  => 'date:Y-m-d',
+    ];
 }

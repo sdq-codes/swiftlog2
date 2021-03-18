@@ -3,6 +3,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\CouponRepository;
+use App\Repositories\Interfaces\CouponRepositoryInterface;
 use App\Repositories\Interfaces\OrderDestinationRepositoryInterface;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Repositories\Interfaces\OrderScheduleRepositoryInterface;
@@ -64,6 +66,11 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(
             TicketCategoryRepositoryInterface::class,
             TicketCategoryRepository::class
+        );
+
+        $this->app->bind(
+            CouponRepositoryInterface::class,
+            CouponRepository::class
         );
     }
 }
