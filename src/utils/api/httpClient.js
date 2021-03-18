@@ -5,7 +5,7 @@ const httpClient = axios.create({
        // baseURL: `https://swiftlogapp.herokuapp.com/api/v1/`,
     // baseURL: `http://167.99.152.240/api/v1/`,
     // baseURL: `http://swiftbe.test/api/v1/`,
-    baseURL: `https://swiftlogist.herokuapp.com/`,
+    baseURL: `https://swiftlogist.herokuapp.com/api/v1/`,
     //baseURL: `https://gdlnigeria.herokuapp.com/api/v1/`,
     timeoutErrorMessage: "Request time out",
     headers: {
