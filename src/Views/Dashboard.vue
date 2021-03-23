@@ -525,6 +525,10 @@ name: "Dashboard",
           this.destination.formatted_address = JSON.parse(localStorage.getItem('user')).address_text;
           this.editPrevioudDestination = true;
         } else if (this.deliveryType === "third") {
+          this.started();
+          this.editPickUp = false;
+          this.editPrevioudDestination = false;
+          this.destination = {};
           this.changeEdit();
         }
         this.step = 1;
