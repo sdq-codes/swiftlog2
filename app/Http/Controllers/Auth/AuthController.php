@@ -59,6 +59,18 @@ class AuthController extends Controller
         return $this->userManagement->registerMemeber($request->all());
     }
 
+    public function registerRider(Request $request){
+        $this->validate($request,[
+            'email' => 'required|email|unique:users',
+            'name' => 'required|string',
+            'password' => 'required|string',
+            'telephone' => 'required|numeric|unique:users',
+            'guarantors' => 'required',
+            'user_type' => 'required',
+        ]);
+        return $this->userManagement->registerMemeber($request->all());
+    }
+
     public function userVerification(Request $request){
         $this->validate($request,[
             'otp' => 'required'

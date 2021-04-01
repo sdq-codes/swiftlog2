@@ -8,6 +8,8 @@ use App\Http\Resources\UserResource;
 use App\Models\Otp;
 use App\Models\User;
 use App\Repositories\Interfaces\OtpRepositoriesInterface;
+use App\Repositories\Interfaces\RiderGuarantorRepositoryInterface;
+use App\Repositories\Interfaces\RiderRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Traits\ExceptionsHandlers;
 use Illuminate\Support\Facades\Auth;
@@ -29,18 +31,26 @@ class UserManagement {
 
     private $otpRepositories;
 
+    private $riderRepository;
+
+    private $riderGuarantorRepository;
+
     use ExceptionsHandlers;
 
     public function __construct(
         UserRepositoryInterface $userRepository,
         OtpRepositoriesInterface $otpRepositories,
-        SmsAdapterInterface $smsAdapter
+        SmsAdapterInterface $smsAdapter,
+        RiderRepositoryInterface $riderRepository,
+        RiderGuarantorRepositoryInterface $riderGuarantorRepository
     ) {
         $this->user = new User();
         $this->auth = Auth::guard('api');
         $this->userRepository = $userRepository;
         $this->otpRepositories = $otpRepositories;
         $this->smsAdapter = $smsAdapter;
+        $this->riderRepository = $riderRepository;
+        $this->riderGuarantorRepository = $riderGuarantorRepository;
     }
     protected function otp(object $user):void {
         $otp = generateRandomstring(4);
@@ -94,6 +104,27 @@ class UserManagement {
         return response()->fetch(
             "Registration  Successful",
             $user,
+            'user'
+        );
+    }
+
+    public function riderRegister($data) {
+        $user = null;
+        $data['password'] = Hash::make($data['password']);
+        $data['user_type'] = 'rider';
+        DB::transaction(function () use (&$user,$data){
+            $user = $this->userRepository->create($data);
+            $data['rider']['user_id'] = $user->id;
+            $rider = $this->riderRepository->create($data['rider']);
+            foreach ($data['guarantors'] as $guarantor) {
+                $guarantor['rider_id'] = $rider->id;
+                $this->riderGuarantorRepository->create($guarantor);
+            }
+        });
+        $resource = new UserResource($user);
+        return response()->created(
+            "Registration  Successful",
+            $resource,
             'user'
         );
     }

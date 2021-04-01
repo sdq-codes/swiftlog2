@@ -37,6 +37,7 @@ Route::group(['prefix' => 'api/v1'],function () {
         Route::group(['prefix' => 'user'], function () {
             Route::get('count/{userType}', 'UserController@count');
             Route::get('admin', 'UserController@admin');
+            Route::get('rider', 'UserController@registerRider');
             Route::post('all', 'UserController@users');
             Route::post('profile', 'UserController@update');
             Route::post('block', 'UserController@block');

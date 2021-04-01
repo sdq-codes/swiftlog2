@@ -49,6 +49,14 @@ class UserController extends Controller {
         return $this->userManagement->updatePassword($request->all());
     }
 
+    public function rider(Request $request) {
+        $this->validate($request, [
+            'new_password' => 'required|min:8|same:new_password_confirm',
+            'new_password_confirm' => 'required|min:8|same:new_password'
+        ]);
+        return $this->userManagement->updatePassword($request->all());
+    }
+
     public function admin() {
         return response()->created(
             "Successfully created coupons",
