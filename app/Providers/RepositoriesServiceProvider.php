@@ -9,12 +9,16 @@ use App\Repositories\Interfaces\OrderDestinationRepositoryInterface;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Repositories\Interfaces\OrderScheduleRepositoryInterface;
 use App\Repositories\Interfaces\OtpRepositoriesInterface;
+use App\Repositories\Interfaces\RiderGuarantorRepositoryInterface;
+use App\Repositories\Interfaces\RiderRepositoryInterface;
 use App\Repositories\Interfaces\TicketCategoryRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\OrderDestinationRepository;
 use App\Repositories\OrderRepository;
 use App\Repositories\OrderScheduleRepository;
 use App\Repositories\OtpRepository;
+use App\Repositories\RiderGuarantorRepository;
+use App\Repositories\RiderRepository;
 use App\Repositories\TicketCategoryRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
@@ -71,6 +75,16 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(
             CouponRepositoryInterface::class,
             CouponRepository::class
+        );
+
+        $this->app->bind(
+            RiderRepositoryInterface::class,
+            RiderRepository::class
+        );
+
+        $this->app->bind(
+            RiderGuarantorRepositoryInterface::class,
+            RiderGuarantorRepository::class
         );
     }
 }

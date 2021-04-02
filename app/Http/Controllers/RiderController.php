@@ -21,10 +21,6 @@ class RiderController extends Controller {
         $this->riderManagement = $riderManagement;
     }
 
-    public function create(Request $request) {
-        return $this->userManagement->riderRegister($request->all());
-    }
-
     public function all() {
         return $this->riderManagement->all();
     }

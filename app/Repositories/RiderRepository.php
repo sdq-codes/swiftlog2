@@ -10,17 +10,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class RiderRepository extends BaseRepository implements RiderRepositoryInterface
 {
-    public function __construct(Rider $model)
-    {
+    public function __construct(Rider $model) {
         parent::__construct($model);
     }
 
-    public function create(array $data): Rider
-    {
+    public function create(array $data): Rider {
         return $this->model->create($data);
     }
 
     public function all(): Collection {
-        return $this->model->with('guarantors', 'user')->get();
+        return $this->model->with('guarantors', 'user', 'bike')->get();
     }
 }

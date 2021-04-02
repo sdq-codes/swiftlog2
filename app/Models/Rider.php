@@ -19,4 +19,8 @@ class Rider extends Model
     public function guarantors() {
         return $this->hasMany(RiderGuarantor::class);
     }
+
+    public function bikes() {
+        return $this->hasMany(BikeRider::class);
+    }
 }

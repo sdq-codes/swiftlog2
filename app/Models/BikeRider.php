@@ -12,11 +12,11 @@ class BikeRider extends Model
 
     protected $guarded = [];
 
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function rider() {
+        return $this->belongsTo(Rider::class);
     }
 
-    public function guarantors() {
-        return $this->hasMany(RiderGuarantor::class);
+    public function bike() {
+        return $this->hasOne(Bike::class);
     }
 }
