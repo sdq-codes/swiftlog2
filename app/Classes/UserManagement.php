@@ -112,10 +112,14 @@ class UserManagement {
         $user = null;
         $data['password'] = Hash::make($data['password']);
         $data['user_type'] = 'rider';
+        $data['business_category'] = 'null';
+        $data['address_text'] = 'null';
+        $data['address_latitude'] = 'null';
+        $data['address_longitude'] = 'null';
         DB::transaction(function () use (&$user,$data){
             $user = $this->userRepository->create($data);
-            $data['rider']['user_id'] = $user->id;
-            $rider = $this->riderRepository->create($data['rider']);
+            $data['user_id'] = $user->id;
+            $rider = $this->riderRepository->create($data);
             foreach ($data['guarantors'] as $guarantor) {
                 $guarantor['rider_id'] = $rider->id;
                 $this->riderGuarantorRepository->create($guarantor);

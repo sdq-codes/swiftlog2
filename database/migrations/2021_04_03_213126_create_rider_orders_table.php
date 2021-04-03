@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBikeRidersTable extends Migration
+class CreateRiderOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateBikeRidersTable extends Migration
      */
     public function up()
     {
-        Schema::create('bike_riders', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('rider_name');
-            $table->string('duration');
-            $table->uuid('bike_id');
+        Schema::create('rider_orders', function (Blueprint $table) {
+            $table->uuid();
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ class CreateBikeRidersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bike_riders');
+        Schema::dropIfExists('rider_orders');
     }
 }

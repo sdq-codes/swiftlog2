@@ -21,6 +21,8 @@ class CreateRiderGuarantorsTable extends Migration
             $table->string('residential_address');
             $table->string('telephone');
             $table->string('residential_office_address');
+            $table->string('drivers_license');
+            $table->string('passport');
             $table->uuid('rider_id');
             $table->foreign('rider_id')
                 ->references('id')

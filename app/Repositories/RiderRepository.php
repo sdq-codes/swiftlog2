@@ -15,10 +15,20 @@ class RiderRepository extends BaseRepository implements RiderRepositoryInterface
     }
 
     public function create(array $data): Rider {
-        return $this->model->create($data);
+        return $this->model->create([
+            'profile_pic' => $data['profile_pic'],
+            'dob' => $data['dob'],
+            'gender' => $data['gender'],
+            'marital' => $data['marital'],
+            'education' => $data['education'],
+            'residential_address' => $data['residential_address'],
+            'drivers_license' => $data['drivers_license'],
+            'passport' => $data['passport'],
+            'user_id' => $data['user_id']
+        ]);
     }
 
     public function all(): Collection {
-        return $this->model->with('guarantors', 'user', 'bike')->get();
+        return $this->model->with('guarantors', 'user')->get();
     }
 }

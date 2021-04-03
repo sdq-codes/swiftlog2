@@ -24,11 +24,6 @@ class CreateRidersTable extends Migration
             $table->string('drivers_license');
             $table->string('passport');
             $table->uuid('bike_id')->nullable();
-            $table->foreign('bike_id')
-                ->references('id')
-                ->on('bikes')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
             $table->uuid('user_id');
             $table->foreign('user_id')
                 ->references('id')

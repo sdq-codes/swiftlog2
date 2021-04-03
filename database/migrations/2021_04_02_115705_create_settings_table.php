@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBikeRidersTable extends Migration
+class CreateSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateBikeRidersTable extends Migration
      */
     public function up()
     {
-        Schema::create('bike_riders', function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('rider_name');
-            $table->string('duration');
-            $table->uuid('bike_id');
+            $table->longText('config');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateBikeRidersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bike_riders');
+        Schema::dropIfExists('settings');
     }
 }

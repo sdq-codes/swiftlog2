@@ -57,6 +57,10 @@ class UserController extends Controller {
         return $this->userManagement->updatePassword($request->all());
     }
 
+    public function registerRider(Request $request) {
+        return $this->userManagement->riderRegister($request->all());
+    }
+
     public function admin() {
         return response()->created(
             "Successfully created coupons",

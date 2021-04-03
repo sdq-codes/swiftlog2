@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('',function (){
     return 'Welcome to Swift Logistics Api';
 });
+Route::post('settings', 'RiderController@createSettings');
 
 Route::group(['prefix' => 'api/v1'],function () {
     Route::get('',function (){
@@ -37,7 +38,6 @@ Route::group(['prefix' => 'api/v1'],function () {
         Route::group(['prefix' => 'user'], function () {
             Route::get('count/{userType}', 'UserController@count');
             Route::get('admin', 'UserController@admin');
-            Route::get('rider', 'UserController@registerRider');
             Route::post('all', 'UserController@users');
             Route::post('profile', 'UserController@update');
             Route::post('block', 'UserController@block');
@@ -74,6 +74,15 @@ Route::group(['prefix' => 'api/v1'],function () {
                 Route::get('', 'TicketController@categories');
                 Route::post('', 'TicketController@createCategories');
             });
+        });
+
+        Route::group(['prefix' => 'rider'], function () {
+            Route::get('', 'RiderController@all');
+            Route::post('', 'UserController@registerRider');
+
+        });
+
+        Route::group(['prefix' => 'settings'], function () {
         });
     });
 });
