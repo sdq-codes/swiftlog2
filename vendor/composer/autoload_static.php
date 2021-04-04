@@ -825,6 +825,7 @@ class ComposerStaticInit99dece19143d7fbc6d192810d77e7e5f
         'App\\Repositories\\TicketCategoryRepository' => __DIR__ . '/../..' . '/app/Repositories/TicketCategoryRepository.php',
         'App\\Repositories\\UserRepository' => __DIR__ . '/../..' . '/app/Repositories/UserRepository.php',
         'App\\RiderOrder' => __DIR__ . '/../..' . '/app/RiderOrder.php',
+        'App\\RiderScore' => __DIR__ . '/../..' . '/app/RiderScore.php',
         'App\\Services\\BaseService' => __DIR__ . '/../..' . '/app/Services/BaseService.php',
         'App\\Services\\EmailService' => __DIR__ . '/../..' . '/app/Services/EmailService.php',
         'App\\Services\\Interfaces\\EmailServiceInterfaces' => __DIR__ . '/../..' . '/app/Services/Interfaces/EmailServiceInterfaces.php',

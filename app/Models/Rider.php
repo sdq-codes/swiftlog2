@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use App\RiderOrder;
 use App\Traits\UuidGenerator;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,5 +23,9 @@ class Rider extends Model
 
     public function bikes() {
         return $this->hasMany(BikeRider::class);
+    }
+
+    public function orderRider() {
+        return $this->hasMany(RiderOrder::class);
     }
 }

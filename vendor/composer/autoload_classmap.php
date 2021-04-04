@@ -95,6 +95,7 @@ return array(
     'App\\Repositories\\TicketCategoryRepository' => $baseDir . '/app/Repositories/TicketCategoryRepository.php',
     'App\\Repositories\\UserRepository' => $baseDir . '/app/Repositories/UserRepository.php',
     'App\\RiderOrder' => $baseDir . '/app/RiderOrder.php',
+    'App\\RiderScore' => $baseDir . '/app/RiderScore.php',
     'App\\Services\\BaseService' => $baseDir . '/app/Services/BaseService.php',
     'App\\Services\\EmailService' => $baseDir . '/app/Services/EmailService.php',
     'App\\Services\\Interfaces\\EmailServiceInterfaces' => $baseDir . '/app/Services/Interfaces/EmailServiceInterfaces.php',

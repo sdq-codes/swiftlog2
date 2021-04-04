@@ -8,8 +8,7 @@ use App\Repositories\Interfaces\RiderRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class RiderRepository extends BaseRepository implements RiderRepositoryInterface
-{
+class RiderRepository extends BaseRepository implements RiderRepositoryInterface {
     public function __construct(Rider $model) {
         parent::__construct($model);
     }
@@ -29,6 +28,11 @@ class RiderRepository extends BaseRepository implements RiderRepositoryInterface
     }
 
     public function all(): Collection {
-        return $this->model->with('guarantors', 'user')->get();
+        return $this->model->with(
+            'guarantors',
+            'user',
+            'orderRider',
+            'orderRider.order'
+        )->get();
     }
 }
