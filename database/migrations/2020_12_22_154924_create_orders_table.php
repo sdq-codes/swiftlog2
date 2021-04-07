@@ -29,6 +29,7 @@ class CreateOrdersTable extends Migration
                 'status',
                 [
                     'cancelled',
+                    'rejected',
                     'pending',
                     'accepted',
                     'pick_up',

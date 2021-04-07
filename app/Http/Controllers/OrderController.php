@@ -4,12 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Classes\OrderManagement;
 use App\Classes\UserManagement;
+use App\Visitor;
 use Illuminate\Http\Request;
 
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller {
     private $orderManagement;
+
+    private function visited() {
+        $user = Auth::user();
+        if (
+            count(Visitor::where('user_id', $user->id)
+            ->whereDate('created_at', Carbon::today())->get()) < 1
+        ) {
+            Visitor::create([
+                "user_id" => $user->id
+            ]);
+        }
+    }
 
     public function __construct(
         OrderManagement $orderManagement
@@ -26,6 +40,7 @@ class OrderController extends Controller {
     }
 
     public function create(Request $request) {
+        $this->visited();
         return response()->created(
             'Order sucessfully created',
             $this->orderManagement->create($request->all()),
@@ -42,6 +57,7 @@ class OrderController extends Controller {
     }
 
     public function user() {
+        $this->visited();
         return response()->fetch(
             'Order fetched',
             $this->orderManagement->user(),
@@ -58,8 +74,8 @@ class OrderController extends Controller {
     }
 
     public function distance(Request $request) {
+        $this->visited();
         $client = new Client();
-
         $response = $client->request('GET', $request->url);
         return $response->getBody();
     }

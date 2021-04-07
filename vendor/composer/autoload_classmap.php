@@ -106,6 +106,7 @@ return array(
     'App\\Traits\\SyncValidator' => $baseDir . '/app/Traits/SyncValidator.php',
     'App\\Traits\\UuidGenerator' => $baseDir . '/app/Traits/UuidGenerator.php',
     'App\\Traits\\updateModel' => $baseDir . '/app/Traits/updateModel.php',
+    'App\\Visitor' => $baseDir . '/app/Visitor.php',
     'App\\support\\Responses\\Codes' => $baseDir . '/app/support/Responses/Codes.php',
     'App\\support\\Responses\\Statuses' => $baseDir . '/app/support/Responses/Statuses.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',

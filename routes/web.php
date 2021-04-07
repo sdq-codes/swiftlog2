@@ -4,12 +4,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('',function (){
     return 'Welcome to Swift Logistics Api';
 });
-Route::post('settings', 'RiderController@createSettings');
 
 Route::group(['prefix' => 'api/v1'],function () {
     Route::get('',function (){
         return 'Welcome to Swift Logistics Api';
     });
+
+    Route::post('settings', 'RiderController@updateSettings');
+    Route::get('dashboard', 'RiderController@dashbaord');
+
 
     Route::group(['prefix' => 'authentication'],function (){
         Route::post('/login','Auth\AuthController@login');
@@ -80,9 +83,6 @@ Route::group(['prefix' => 'api/v1'],function () {
             Route::get('', 'RiderController@all');
             Route::post('', 'UserController@registerRider');
 
-        });
-
-        Route::group(['prefix' => 'settings'], function () {
         });
     });
 });

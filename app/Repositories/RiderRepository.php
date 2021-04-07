@@ -32,6 +32,8 @@ class RiderRepository extends BaseRepository implements RiderRepositoryInterface
             'guarantors',
             'user',
             'orderRider',
+            'orderRider.order',
+            'score',
             'orderRider.order'
         )->get();
     }

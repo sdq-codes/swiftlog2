@@ -836,6 +836,7 @@ class ComposerStaticInit99dece19143d7fbc6d192810d77e7e5f
         'App\\Traits\\SyncValidator' => __DIR__ . '/../..' . '/app/Traits/SyncValidator.php',
         'App\\Traits\\UuidGenerator' => __DIR__ . '/../..' . '/app/Traits/UuidGenerator.php',
         'App\\Traits\\updateModel' => __DIR__ . '/../..' . '/app/Traits/updateModel.php',
+        'App\\Visitor' => __DIR__ . '/../..' . '/app/Visitor.php',
         'App\\support\\Responses\\Codes' => __DIR__ . '/../..' . '/app/support/Responses/Codes.php',
         'App\\support\\Responses\\Statuses' => __DIR__ . '/../..' . '/app/support/Responses/Statuses.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',

@@ -4,6 +4,7 @@ namespace App\Models;
 
 
 use App\RiderOrder;
+use App\RiderScore;
 use App\Traits\UuidGenerator;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,5 +28,9 @@ class Rider extends Model
 
     public function orderRider() {
         return $this->hasMany(RiderOrder::class);
+    }
+
+    public function score() {
+        return $this->hasMany(RiderScore::class);
     }
 }

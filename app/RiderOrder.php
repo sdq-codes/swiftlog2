@@ -12,6 +12,6 @@ class RiderOrder extends Model
     use UuidGenerator;
 
     public function order() {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class)->orderByDesc('created_at');
     }
 }
