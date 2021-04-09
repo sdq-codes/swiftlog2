@@ -11,7 +11,7 @@
             style="background-color: white; color: black; cursor: default"
         >
           <h5 class="text-center mb-5">
-            Ticket
+            Cancellation reason
           </h5>
           <div v-if="step === 1">
             <div  v-for="(ticket, index) in tickets" :key="ticket.id">
@@ -54,7 +54,7 @@ import Header from "@/components/Header";
 import httpClient from "@/utils/api/httpClient";
 
 export default {
-name: "Ticket",
+name: "CancelledOrder",
   components: {Header},
   data() {
     return {
@@ -65,7 +65,7 @@ name: "Ticket",
     }
   },
   mounted() {
-    this.tickets = JSON.parse(localStorage.getItem('settings'))['ticket_category']['list_of_reasons']
+      this.tickets = JSON.parse(localStorage.getItem('settings'))['user_cancellation']['list_of_reasons'];
   },
   methods: {
     moveFoward() {
@@ -77,8 +77,8 @@ name: "Ticket",
             .then(() => {
               this.$router.push({ name: 'dashboard'});
               this.$swal(
-                  'Ticket Submitted',
-                  'You have successfully submitted your ticket',
+                  'Successful',
+                  'You have successfully cancelled your order',
                   'success'
               );
             })

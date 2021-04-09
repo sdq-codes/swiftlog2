@@ -148,16 +148,19 @@ name: "Register",
       phone: "",
       password: "",
       errors: [],
+      categories: [],
       loading: false,
       category: "",
       selectOptions: [
-        "Clothings",
-        "Computer Accessories",
-        "Documents",
-        "Electronics",
-        "Food",
-        "Health Products",
       ],
+    }
+  },
+  mounted() {
+    this.categories = JSON.parse(localStorage.getItem('settings'))['bussiness_category']['list_of_reasons']
+    for (const [key, value] of Object.entries(this.categories)) {
+      if (value === true) {
+        this.selectOptions.push(key)
+      }
     }
   },
   methods: {

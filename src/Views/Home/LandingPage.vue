@@ -259,7 +259,7 @@ import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 import StarRating from 'vue-star-rating'
-import httpClient from "@/utils/api/httpClient";
+
 export default {
 name: "LandingPage",
   components: { VueSlickCarousel, StarRating },
@@ -269,15 +269,6 @@ name: "LandingPage",
   methods: {
     visitors() {
       this.inloadress= true
-      httpClient.get("blog/post")
-          .then((response => {
-            this.allVisitors = response.data.data['stats'][0]
-            this.returnees = response.data.data['stats'][1]
-            this.blogStats = response.data.data['stats'][2]
-          }))
-          .finally(() => {
-            this.inloadress = false
-          })
     }
   }
 }

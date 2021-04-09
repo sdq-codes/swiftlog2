@@ -72,7 +72,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+//@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 
 @import "../assets/style/tailwind.css";
 
@@ -101,6 +101,24 @@ export default {
   src: url(../assets/fonts/AirbnbCerealMedium.woff)
 }
 
+@font-face {
+  font-family: 'AirbnbCereal';
+  font-weight: 500;
+  src: url("../assets/fonts/AirbnbCerealMedium.woff");
+}
+
+@font-face {
+  font-family: 'AirbnbCereal';
+  font-weight: 600;
+  src: url("../assets/fonts/AirbnbCerealBold.woff");
+}
+
+@font-face {
+  font-family: 'AirbnbCereal';
+  font-weight: 700;
+  src: url("../assets/fonts/AirbnbCerealExtraBold.woff");
+}
+
 .vs__dropdown-menu, #vs1__listbox {
   background: red !important;
   z-index: 99999999999;
@@ -118,7 +136,7 @@ export default {
   cursor: pointer;
   width: 100%;
   margin-top: 2rem;
-  font-family: Poppins, sans-serif;
+  font-family: AirbnbCereal, sans-serif;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   font-size: 1rem;
@@ -151,7 +169,7 @@ button {
 }
 
 * {
-  font-family: Poppins, sans-serif;
+  font-family: AirbnbCereal, sans-serif;
 }
 
 ol, ul {

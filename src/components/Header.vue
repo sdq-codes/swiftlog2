@@ -168,7 +168,8 @@ name: "Header",
       this.lastName = remainingName.join()
     },
     logout() {
-      localStorage.clear();
+      localStorage.removeItem('user');
+      localStorage.removeItem('userToken');
       this.$router.push({ name: 'landing' })
     }
   }

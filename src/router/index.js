@@ -15,6 +15,7 @@ const ProfilePage = () => import('../Views/ProfilePage')
 const OrderHistory = () => import('../Views/OrderHistory')
 const Ticket = () => import('../Views/Ticket')
 const Track = () => import('../Views/Track')
+const Cancelled = () => import('../Views/CancelledOrder')
 const Verification = () => import('../Views/Verification')
 
 Vue.use(VueRouter)
@@ -97,6 +98,14 @@ const routes = [
     path: '/track',
     component: Track,
     name: 'track',
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/cancelled',
+    component: Cancelled,
+    name: 'cancelled',
     meta: {
       requireAuth: true
     }

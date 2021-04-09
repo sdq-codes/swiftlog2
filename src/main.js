@@ -23,6 +23,19 @@ import VueSweetalert2 from 'vue-sweetalert2';
 
 // If you don't need the styles, do not connect
 import 'sweetalert2/dist/sweetalert2.min.css';
+import Pusher from "pusher-js";
+import Echo from "laravel-echo";
+
+Pusher.logToConsole = true;
+
+
+window.Echo = new Echo({
+  broadcaster: "pusher",
+  key: "8f1f46075f6b88316a46",
+  cluster: "eu",
+  forceTLS: true,
+  namespace: false
+});
 
 Vue.component("v-select", vSelect);
 Vue.use(VueGoogleMaps, {
