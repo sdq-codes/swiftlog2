@@ -334,15 +334,8 @@
                 </div>
               </div>
               <div class="flex" v-for="(singleOtherDestination, index) in otherDestinations" :key="index">
-                <img src="../assets/images/Oval.svg" v-if="'vicinity' in this.destination" class="mt-4" alt="" style="height: 17px">
                 <img src="../assets/images/Oval.svg" v-else class="mt-2" alt="" style="height: 17px">
                 <div class="w-10/12">
-                  <h5 class="mb-auto pt-1 pl-3 pr-4">
-                  <span
-                      style="font-family: 'Airbnb Cereal App Light'; font-size: 1rem; font-style: normal; font-weight: 400; letter-spacing: 0px;text-align: left;" class="ml-auto" >
-                  {{ singleOtherDestination.vicinity }}
-                  </span>
-                  </h5>
                   <div class="w-12/12 px-3">
                     <small
                         style="font-family: 'Airbnb Cereal App Light'; font-size: 0.9rem; font-style: normal; font-weight: 400; letter-spacing: 0px;"
