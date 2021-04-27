@@ -194,7 +194,7 @@
                 <div v-if="editPrevioudDestination" class=" ml-auto mt-1">
                   <button class="text-right" style="color: #64245C" @click="changePreviousDestinationEdit">Edit</button>
                 </div>
-                <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg @click="changeNumberOfOrders" class="ml-auto mt-4" width="28" height="28" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M20.5 8.54175V32.4584" stroke="#606470" stroke-width="3.41667" stroke-linecap="round" stroke-linejoin="round"/>
                   <path d="M8.54166 20.5H32.4583" stroke="#606470" stroke-width="3.41667" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
