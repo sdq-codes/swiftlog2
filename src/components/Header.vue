@@ -4,7 +4,7 @@
 
     <div class="header__logo  flex justify-start items-center">
       <router-link :to="{ name: 'dashboard' }">
-        <img src="../assets/images/swift-logo.png" alt="Lernen Logo" class="object-contain w-32"/>
+        <img src="../assets/images/swift-logo.png" alt="Lernen Logo" class="object-contain w-24"/>
       </router-link>
     </div>
 
