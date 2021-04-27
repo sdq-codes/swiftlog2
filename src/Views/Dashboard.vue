@@ -334,14 +334,14 @@
                 </div>
               </div>
               <div v-for="(singleOtherDestination, index) in otherDestinations" :key="index">
-                <div class="flex" v-if="typeof singleOtherDestination === 'object'">
+                <div class="flex mt-2" v-if="typeof singleOtherDestination === 'object'">
                   <img src="../assets/images/Oval.svg" class="mt-2" alt="" style="height: 17px">
                   <div class="w-10/12">
                     <div class="w-12/12 px-3">
                       <small
                           style="font-family: 'Airbnb Cereal App Light'; font-size: 0.9rem; font-style: normal; font-weight: 400; letter-spacing: 0px;"
                           class=" ml-auto text-muted" >
-                        {{ singleOtherDestination }}
+                        {{ singleOtherDestination['formatted_address'] }}
                       </small>
                     </div>
                   </div>
