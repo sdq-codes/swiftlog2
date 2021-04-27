@@ -205,7 +205,7 @@
                 </div>
                 <div class="flex">
                   <img src="../assets/images/purpleRectangle.svg" height="23" class="pl-1 mb-0" width="22" alt="">
-                  <GMap @changeInValue="addDestination(index)" gmap-class-map="pt-1 pl-3 pr-4" />
+                  <GMap @changeInValue="addDestination($event, index)" gmap-class-map="pt-1 pl-3 pr-4" />
                   <svg v-if="numberOfOrders === index" @click="changeNumberOfOrders" class="ml-auto mt-4" width="28" height="28" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M20.5 8.54175V32.4584" stroke="#606470" stroke-width="3.41667" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M8.54166 20.5H32.4583" stroke="#606470" stroke-width="3.41667" stroke-linecap="round" stroke-linejoin="round"/>
@@ -917,10 +917,10 @@ name: "Dashboard",
         this.numberOfOrders = this.numberOfOrders + 1;
       }
     },
-    addDestination(e, index) {
-      console.log(e)
+    addDestination(event, index) {
+      console.log(event)
       console.log(index)
-      this.otherDestinations[index] = e
+      this.otherDestinations[index] = event
       console.log(this.otherDestinations)
     },
     started() {
