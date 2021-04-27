@@ -1084,7 +1084,7 @@ name: "Dashboard",
       if (this.numberOfOrders > 0) {
         for (let i = 0; i < this.numberOfOrders.length; i++) {
           if (typeof this.numberOfOrders[i] === 'object') {
-            console.log(this.numberOfOrders[i])
+            console.log(this.numberOfOrders[i], "ojhjkhjhj")
             secondArray.push(
                 {
                   destination: this.numberOfOrders[i],
@@ -1097,7 +1097,7 @@ name: "Dashboard",
             )
           }
         }
-        console.log(secondArray);
+        console.log(secondArray, "ddddd");
         dataForm['order_destinations'] = secondArray;
       } else {
         dataForm['order_destinations'] = [{
