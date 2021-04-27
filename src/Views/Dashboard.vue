@@ -1129,18 +1129,41 @@ name: "Dashboard",
         url: finalUrl
       })
       .then(response => {
-        this.distanceTotal = response.data['rows'][0]['elements']['0']['distance']['value'];
-        if (this.settings.delivery_price_rate.kilometers.use === true) {
-          this.amount = ((this.distanceTotal / 100) * this.settings.delivery_price_rate.kilometers.rate).toFixed(2)
+        if (this.numberOfOrders > 0) {
+          const finalUrl = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${this.finalPickUp}&destinations=${this.otherDestinations[1]['formatted_address']}&key=AIzaSyCNL1Mzob3HzKiPtt9nB4su5XXxr_JqGik`;
+          let firstResponse = response;
+          httpClient.post("orders/calculate/distance", {
+            url: finalUrl
+          })
+            .then(response => {
+              console.log(response);
+              this.distanceTotal = response.data['rows'][0]['elements']['0']['distance']['value'];
+              let distanceTotalSecond = firstResponse.data['rows'][0]['elements']['0']['distance']['value'];
+              if (this.settings.delivery_price_rate.kilometers.use === true) {
+                this.amount = (((this.distanceTotal + distanceTotalSecond) / 100) * this.settings.delivery_price_rate.kilometers.rate).toFixed(2)
+              } else {
+                this.amount = (((this.distanceTotal + distanceTotalSecond) / 100) * 85).toFixed(2)
+              }
+              if (this.settings.delivery_price_rate.time.use === true) {
+                this.amount = (((this.distanceTotal + distanceTotalSecond) / 100) * this.settings.delivery_price_rate.time.rate).toFixed(2)
+              } else {
+                this.amount = (((this.distanceTotal + distanceTotalSecond) / 100) * 85).toFixed(2)
+              }
+            })
         } else {
-          this.amount = ((this.distanceTotal / 100) * 85).toFixed(2)
+          this.distanceTotal = response.data['rows'][0]['elements']['0']['distance']['value'];
+          console.log("dfsafskdj");
+          if (this.settings.delivery_price_rate.kilometers.use === true) {
+            this.amount = ((this.distanceTotal / 100) * this.settings.delivery_price_rate.kilometers.rate).toFixed(2)
+          } else {
+            this.amount = ((this.distanceTotal / 100) * 85).toFixed(2)
+          }
+          if (this.settings.delivery_price_rate.time.use === true) {
+            this.amount = ((this.distanceTotal / 100) * this.settings.delivery_price_rate.time.rate).toFixed(2)
+          } else {
+            this.amount = ((this.distanceTotal / 100) * 85).toFixed(2)
+          }
         }
-        if (this.settings.delivery_price_rate.time.use === true) {
-          this.amount = ((this.distanceTotal / 100) * this.settings.delivery_price_rate.time.rate).toFixed(2)
-        } else {
-          this.amount = ((this.distanceTotal / 100) * 85).toFixed(2)
-        }
-
       })
       .finally(() => this.loading = false);
     },
@@ -1175,6 +1198,10 @@ name: "Dashboard",
       }
       this.finalPickUp = pickUp;
       this.finaldestination = finalDestination;
+      if (this.otherDestinations.length < this.numberOfOrders) {
+        this.notify("Kindly set all destination addresses", "error", 'bottom')
+        return false
+      }
       return true;
     },
     setDestinationRecent(recentItem) {
