@@ -1083,13 +1083,13 @@ name: "Dashboard",
       }];
       if (this.numberOfOrders > 0) {
         console.log("ash")
-        for (let i = 0; i < this.numberOfOrders; i++) {
-          console.log(this.numberOfOrders[i], "ojhjkhjhj")
-          if (typeof this.numberOfOrders[i] === 'object') {
-            console.log(this.numberOfOrders[i], "ojhjkhjhj")
+        for (let i = 0; i < this.otherDestinations.length; i++) {
+          console.log(this.otherDestinations[i], "ojhjkhjhj")
+          if (typeof this.otherDestinations[i] === 'object') {
+            console.log(this.otherDestinations[i], "ojhjkhjhj")
             secondArray.push(
                 {
-                  destination: this.numberOfOrders[i],
+                  destination: this.otherDestinations[i],
                   recipient_name: this.receipientName,
                   recipient_telephone: this.receipientTel,
                   category: this.category,
