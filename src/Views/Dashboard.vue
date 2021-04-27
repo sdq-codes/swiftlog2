@@ -1084,6 +1084,7 @@ name: "Dashboard",
       if (this.numberOfOrders > 0) {
         console.log("ash")
         for (let i = 0; i < this.numberOfOrders; i++) {
+          console.log(this.numberOfOrders[i], "ojhjkhjhj")
           if (typeof this.numberOfOrders[i] === 'object') {
             console.log(this.numberOfOrders[i], "ojhjkhjhj")
             secondArray.push(
