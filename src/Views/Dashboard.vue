@@ -1080,6 +1080,14 @@ name: "Dashboard",
         fragile: this.fragile,
         address_lat: this.addNote,
       }];
+      if (this.numberOfOrders > 0) {
+        for (let i = 0; i < this.numberOfOrders.length; i++) {
+          if (typeof this.numberOfOrders[i] === 'object') {
+            console.log(this.numberOfOrders[i])
+            dataForm['order_destinations'].push(this.numberOfOrders[i])
+          }
+        }
+      }
       console.log(dataForm);
       httpClient.post('orders', dataForm)
       .then((response) => {
