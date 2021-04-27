@@ -194,6 +194,18 @@
                 <div v-if="editPrevioudDestination" class=" ml-auto mt-1">
                   <button class="text-right" style="color: #64245C" @click="changePreviousDestinationEdit">Edit</button>
                 </div>
+                <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20.5 8.54175V32.4584" stroke="#606470" stroke-width="3.41667" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M8.54166 20.5H32.4583" stroke="#606470" stroke-width="3.41667" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div  v-for="index in numberOfOrders" :key="index">
+                <div class="flex">
+                  <img src="../assets/images/talllink.svg" style="height: 80px" class="pl-3" alt="">
+                </div>
+                <div class="flex">
+                  <GMap @changeInValue="addDestination(index)" gmap-class-map="pt-1 pl-3 pr-4" />
+                </div>
               </div>
             </article>
             <div class="pt-12 px-8">
@@ -857,6 +869,9 @@ name: "Dashboard",
       modalVisible: false,
       showContact: false,
       nownowtime: "",
+      maxOrders: 3,
+      numberOfOrders: 0,
+      otherDestinations: []
     }
   },
   watch: {
@@ -892,7 +907,14 @@ name: "Dashboard",
     this.nownowtime = valid;
   },
   methods: {
-
+    changeNumberOfOrders() {
+      if (this.numberOfOrders < maxOrders) {
+        this.numberOfOrders = this.numberOfOrders + 1;
+      }
+    },
+    addDestination(e, index) {
+      this.otherDestinations[index] = e
+    },
     started() {
       this.name = JSON.parse(localStorage.getItem('user')).name
       this.addressText = JSON.parse(localStorage.getItem('user')).address_text
