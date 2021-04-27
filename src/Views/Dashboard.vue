@@ -1083,8 +1083,8 @@ name: "Dashboard",
       }];
       if (this.numberOfOrders > 0) {
         console.log("ash")
-        for (let i = 0; i < this.numberOfOrders.length; i++) {
-          // if (typeof this.numberOfOrders[i] === 'object') {
+        for (let i = 0; i < this.numberOfOrders; i++) {
+          if (typeof this.numberOfOrders[i] === 'object') {
             console.log(this.numberOfOrders[i], "ojhjkhjhj")
             secondArray.push(
                 {
@@ -1096,7 +1096,7 @@ name: "Dashboard",
                   address_lat: this.addNote,
                 }
             )
-          // }
+          }
         }
         console.log(secondArray, "ddddd");
         dataForm['order_destinations'] = secondArray;
