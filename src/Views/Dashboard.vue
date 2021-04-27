@@ -1140,15 +1140,20 @@ name: "Dashboard",
               this.distanceTotal = response.data['rows'][0]['elements']['0']['distance']['value'];
               let distanceTotalSecond = firstResponse.data['rows'][0]['elements']['0']['distance']['value'];
               console.log(this.distanceTotal, distanceTotalSecond);
+              console.log((this.distanceTotal + distanceTotalSecond) / 100);
               if (this.settings.delivery_price_rate.kilometers.use === true) {
-                this.amount = (((this.distanceTotal + distanceTotalSecond) / 100) * this.settings.delivery_price_rate.kilometers.rate).toFixed(2)
+                this.amount = ((this.distanceTotal / 100) * this.settings.delivery_price_rate.kilometers.rate).toFixed(2)
+                this.amount += ((distanceTotalSecond / 100) * this.settings.delivery_price_rate.kilometers.rate).toFixed(2)
               } else {
-                this.amount = (((this.distanceTotal + distanceTotalSecond) / 100) * 85).toFixed(2)
+                this.amount = ((this.distanceTotal / 100) * 85).toFixed(2)
+                this.amount += ((distanceTotalSecond / 100) * this.settings.delivery_price_rate.kilometers.rate).toFixed(2)
               }
               if (this.settings.delivery_price_rate.time.use === true) {
-                this.amount = (((this.distanceTotal + distanceTotalSecond) / 100) * this.settings.delivery_price_rate.time.rate).toFixed(2)
+                this.amount = ((this.distanceTotal / 100) * this.settings.delivery_price_rate.time.rate).toFixed(2)
+                this.amount += ((distanceTotalSecond / 100) * this.settings.delivery_price_rate.time.rate).toFixed(2)
               } else {
                 this.amount = (((this.distanceTotal + distanceTotalSecond) / 100) * 85).toFixed(2)
+                this.amount += ((distanceTotalSecond / 100) * this.settings.delivery_price_rate.time.rate).toFixed(2)
               }
             })
         } else {
