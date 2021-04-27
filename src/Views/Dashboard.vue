@@ -334,7 +334,7 @@
                 </div>
               </div>
               <div class="flex" v-for="(singleOtherDestination, index) in otherDestinations" :key="index">
-                <img src="../assets/images/Oval.svg" v-else class="mt-2" alt="" style="height: 17px">
+                <img src="../assets/images/Oval.svg" class="mt-2" alt="" style="height: 17px">
                 <div class="w-10/12">
                   <div class="w-12/12 px-3">
                     <small
