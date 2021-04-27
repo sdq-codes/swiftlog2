@@ -908,7 +908,7 @@ name: "Dashboard",
   },
   methods: {
     changeNumberOfOrders() {
-      if (this.numberOfOrders < maxOrders) {
+      if (this.numberOfOrders < this.maxOrders) {
         this.numberOfOrders = this.numberOfOrders + 1;
       }
     },
