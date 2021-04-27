@@ -1139,6 +1139,7 @@ name: "Dashboard",
               console.log(response);
               this.distanceTotal = response.data['rows'][0]['elements']['0']['distance']['value'];
               let distanceTotalSecond = firstResponse.data['rows'][0]['elements']['0']['distance']['value'];
+              console.log(this.distanceTotal, distanceTotalSecond);
               if (this.settings.delivery_price_rate.kilometers.use === true) {
                 this.amount = (((this.distanceTotal + distanceTotalSecond) / 100) * this.settings.delivery_price_rate.kilometers.rate).toFixed(2)
               } else {
