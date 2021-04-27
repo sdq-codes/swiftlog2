@@ -1072,7 +1072,8 @@ name: "Dashboard",
         }
       }
       console.log(this.destination);
-      dataForm['order_destinations'] = [{
+      let secondArray = [];
+      secondArray = [{
         destination: this.destination,
         recipient_name: this.receipientName,
         recipient_telephone: this.receipientTel,
@@ -1084,11 +1085,30 @@ name: "Dashboard",
         for (let i = 0; i < this.numberOfOrders.length; i++) {
           if (typeof this.numberOfOrders[i] === 'object') {
             console.log(this.numberOfOrders[i])
-            dataForm['order_destinations'].push(this.numberOfOrders[i])
+            secondArray.push(
+                {
+                  destination: this.numberOfOrders[i],
+                  recipient_name: this.receipientName,
+                  recipient_telephone: this.receipientTel,
+                  category: this.category,
+                  fragile: this.fragile,
+                  address_lat: this.addNote,
+                }
+            )
           }
         }
+        console.log(secondArray);
+        dataForm['order_destinations'] = secondArray;
+      } else {
+        dataForm['order_destinations'] = [{
+          destination: this.destination,
+          recipient_name: this.receipientName,
+          recipient_telephone: this.receipientTel,
+          category: this.category,
+          fragile: this.fragile,
+          address_lat: this.addNote,
+        }];
       }
-      console.log(dataForm);
       httpClient.post('orders', dataForm)
       .then((response) => {
         this.order = response.data.data.order;
