@@ -87,7 +87,7 @@
       <div @click="$router.go(-1)" v-else class="arrow-back flex justify-content-center px-5">
         <img src="../assets/images/arrow-back-outline.svg" alt="">
       </div>
-      <div class="lg:w-custom md:w-3/6 lg:w-2/10 px-0" style="overflow-y: scroll; max-width: 600px;">
+      <div class="lg:w-custom md:w-2/6 lg:w-2/10 px-0" style="overflow-y: scroll; max-width: 600px;">
         <article
             class="text-white text-left rounded-lg p-0 pb-8"
             style="background-color: white; color: black; cursor: default"
@@ -96,7 +96,7 @@
             <h6 class="text-center pt-5">Select Option</h6>
             <h6 class="text-center text-sm mt-1 mb-5 font-light">I am the</h6>
             <div class="block inline-flex w-full bg-gray-100 p-4 rounded-b" style="border-radius: 15px">
-              <img src="../assets/images/sender.svg" alt="">
+              <img src="../assets/images/sender.svg" width="32px" height="32px" alt="">
               <div class="block w-full">
                 <div  class="flex w-full space-between p-2 rounded-b pb-0" >
                   <h6 class="mr-auto text-lg font-normal" style="color: #353B50">Sender</h6>
@@ -110,7 +110,7 @@
               </div>
             </div>
             <div class="block inline-flex w-full bg-gray-100 p-4 rounded-b mt-5"  style="border-radius: 15px">
-              <img src="../assets/images/receiver.svg" alt="">
+              <img src="../assets/images/receiver.svg"  width="32px" height="32px"  alt="">
               <div class="block w-full">
                 <div  class="flex w-full space-between p-2 rounded-b pb-0" >
                   <h6 class="mr-auto text-lg font-normal" style="color: #353B50">Receiver</h6>
@@ -124,7 +124,7 @@
               </div>
             </div>
             <div class="block inline-flex w-full bg-gray-100 p-4 rounded-b mt-5"  style="border-radius: 15px">
-              <img src="../assets/images/third.svg" alt="">
+              <img src="../assets/images/third.svg"  width="32px" height="32px"  alt="">
               <div class="block w-full">
                 <div  class="flex w-full space-between p-2 rounded-b pb-0" >
                   <h6 class="mr-auto text-lg font-normal" style="color: #353B50">Third Party</h6>
@@ -793,7 +793,7 @@
             </div>
           </div>
         </div>
-        <div class="flex mt-4 lg:mt-10" v-if="!loading && step === 1">
+        <div class="flex mt-4 lg:mt-10" v-if="step === 1">
           <button class="btn-primary w-5/12 lg:w-12/12 "
             style="background-color: white; color: #64245C; border-radius: 10px"
             @click="estimation"
