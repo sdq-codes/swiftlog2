@@ -918,7 +918,10 @@ name: "Dashboard",
       }
     },
     addDestination(e, index) {
+      console.log(e)
+      console.log(index)
       this.otherDestinations[index] = e
+      console.log(this.otherDestinations)
     },
     started() {
       this.name = JSON.parse(localStorage.getItem('user')).name
