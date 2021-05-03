@@ -199,17 +199,19 @@
                   <path d="M8.54166 20.5H32.4583" stroke="#606470" stroke-width="3.41667" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <div  v-for="index in numberOfOrders" :key="index">
-                <div class="flex">
-                  <img src="../assets/images/talllink.svg" style="height: 80px" class="pl-3" alt="">
-                </div>
-                <div class="flex">
-                  <img src="../assets/images/purpleRectangle.svg" height="23" class="pl-1 mb-0" width="22" alt="">
-                  <GMap @changeInValue="addDestination($event, index)" gmap-class-map="pt-1 pl-3 pr-4" />
-                  <svg v-if="numberOfOrders === index" @click="changeNumberOfOrders" class="ml-auto mt-4" width="28" height="28" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20.5 8.54175V32.4584" stroke="#606470" stroke-width="3.41667" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M8.54166 20.5H32.4583" stroke="#606470" stroke-width="3.41667" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
+              <div v-if="maxOrders > 0">
+                <div  v-for="index in numberOfOrders" :key="index">
+                  <div class="flex">
+                    <img src="../assets/images/talllink.svg" style="height: 80px" class="pl-3" alt="">
+                  </div>
+                  <div class="flex">
+                    <img src="../assets/images/purpleRectangle.svg" height="23" class="pl-1 mb-0" width="22" alt="">
+                    <GMap @changeInValue="addDestination($event, index)" gmap-class-map="pt-1 pl-3 pr-4" />
+                    <svg v-if="numberOfOrders === index" @click="changeNumberOfOrders" class="ml-auto mt-4" width="28" height="28" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20.5 8.54175V32.4584" stroke="#606470" stroke-width="3.41667" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M8.54166 20.5H32.4583" stroke="#606470" stroke-width="3.41667" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </article>
@@ -895,7 +897,7 @@ name: "Dashboard",
       modalVisible: false,
       showContact: false,
       nownowtime: "",
-      maxOrders: 3,
+      maxOrders: 0,
       numberOfOrders: 0,
       otherDestinations: []
     }
@@ -915,6 +917,7 @@ name: "Dashboard",
   },
   mounted() {
     this.settings = JSON.parse(localStorage.getItem('settings'));
+    this.maxOrders = parseInt(JSON.parse(localStorage.getItem('number_of_address'))) -1;
     let currentDate = new Date()
 
     let startDate = new Date(currentDate.getTime());
