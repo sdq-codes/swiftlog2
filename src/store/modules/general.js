@@ -1,5 +1,7 @@
+import httpClient from "@/utils/api/httpClient";
 const state = {
-    loading: false
+    loading: false,
+		settings: null
 };
 
 // getters
@@ -14,6 +16,13 @@ const actions = {
     editLoadingP({ commit }) {
         commit("toggleLoading");
     },
+		getSettings() {
+			httpClient.get("settings")
+				.then(response => {
+					let config = response.data.data.settings.config;
+					localStorage.setItem('settings', config)
+				})
+		}
 };
 
 // mutations

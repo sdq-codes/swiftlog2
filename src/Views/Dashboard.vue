@@ -915,9 +915,19 @@ name: "Dashboard",
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     this.refFinal = text;
   },
+  beforeMount() {
+    httpClient.get("settings")
+        .then(response => {
+          let config = response.data.data.settings.config;
+          localStorage.setItem('settings', config)
+          this.settings = JSON.parse(localStorage.getItem('settings'));
+          this.maxOrders = JSON.parse(localStorage.getItem('settings'))['number_of_address'] -1;
+        })
+  },
   mounted() {
     this.settings = JSON.parse(localStorage.getItem('settings'));
-    this.maxOrders = parseInt(JSON.parse(localStorage.getItem('number_of_address'))) -1;
+    this.maxOrders = JSON.parse(localStorage.getItem('settings'))['number_of_address'] -1;
+    console.log(this.maxOrders)
     let currentDate = new Date()
 
     let startDate = new Date(currentDate.getTime());
