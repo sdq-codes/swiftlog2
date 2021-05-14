@@ -18,22 +18,22 @@
             <div class="block md:flex">
               <div class="flex">
                 <img src="../assets/images/green.svg" class="" alt="">
-                <h6 class="font-semibold pl-3">{{ order.address_text.split(',')[1] }}</h6>
+                <h6 class=" pl-3">{{ order.address_text.split(',')[1] }}</h6>
               </div>
-              <h6 class="font-semibold pl-3 ml-auto"></h6>
+              <h6 class=" pl-3 ml-auto">{{order.destinations[0]['recipient_name']}}</h6>
             </div>
             <div class="block md:flex mt-4">
               <div class="flex">
                 <img src="../assets/images/red.svg" alt="">
-                <h6 class="font-semibold pl-3">{{ order.destinations[0].address_text.split(',')[1] }}</h6>
+                <h6 class=" pl-3">{{ order.destinations[0].address_text.split(',')[1] }}</h6>
               </div>
             </div>
             <div class="block md:flex mt-3">
-              <h6 class="font-light ">{{ getFormatted(order.created_at) }}</h6>
+              <small class="font-light ">{{ getFormatted(order.created_at) }}</small>
             </div>
             <div class="block md:flex">
-              <h6 class="font-light text-green-600 font-semibold uppercase" style="">{{ order.status }}</h6>
-              <h4 class="font-light lg:text-2xl font-bold ml-auto">&#8358;{{order.price}}</h4>
+              <small class="font-light text-green-600 uppercase" style="">{{ order.status }}</small>
+              <h6 class="font-light font-semibold lg:text-xl ml-auto">&#8358;{{order.price}}</h6>
             </div>
           </div>
         </article>

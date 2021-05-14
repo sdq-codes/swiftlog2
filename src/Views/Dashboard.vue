@@ -488,7 +488,7 @@
               <h5
                   style="font-family: 'Airbnb Cereal App Bold'; font-size: 1.3rem; line-height: 44px;"
                   class="text-center mt-3 mb-6">Searching for dispatch</h5>
-              <img src="../assets/images/cancelRide.svg" alt="" width="64px" class="ml-auto mr-auto">
+              <img @click="rerendet" src="../assets/images/cancelRide.svg" alt="" width="64px" class="ml-auto mr-auto">
               <h6
                   style="font-family: 'Airbnb Cereal App Medium'; font-size: 18px; font-weight: 500; cursor: pointer"
                   class="text-center mt-10"
@@ -887,7 +887,7 @@ name: "Dashboard",
       calender: null,
       schedule: false,
       fragile: false,
-      amount: null,
+      amount: 0,
       payment_method: "cash delivery",
       payment_status: "pending",
       full_name: JSON.parse(localStorage.getItem('user'))['name'],
@@ -920,8 +920,8 @@ name: "Dashboard",
         .then(response => {
           let config = response.data.data.settings.config;
           localStorage.setItem('settings', config)
-          this.settings = JSON.parse(localStorage.getItem('settings'));
-          this.maxOrders = JSON.parse(localStorage.getItem('settings'))['number_of_address'] -1;
+          this.settings = JSON.parse(config);
+          this.maxOrders = JSON.parse(config)['number_of_address'] -1;
         })
   },
   mounted() {
@@ -1187,65 +1187,66 @@ name: "Dashboard",
     },
     calculate() {
       this.loading = true;
-      const finalUrl = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${this.finalPickUp}&destinations=${this.finaldestination}&key=AIzaSyCNL1Mzob3HzKiPtt9nB4su5XXxr_JqGik`;
-
-      httpClient.post("orders/calculate/distance", {
-        url: finalUrl
-      })
-      .then(response => {
-        if (this.numberOfOrders > 0) {
-          const finalUrl = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${this.finalPickUp}&destinations=${this.otherDestinations[1]['formatted_address']}&key=AIzaSyCNL1Mzob3HzKiPtt9nB4su5XXxr_JqGik`;
-          let firstResponse = response;
-          httpClient.post("orders/calculate/distance", {
-            url: finalUrl
-          })
-            .then(response => {
-              console.log(response);
-              this.distanceTotal = response.data['rows'][0]['elements']['0']['distance']['value'];
-              let distanceTotalSecond = firstResponse.data['rows'][0]['elements']['0']['distance']['value'];
-              console.log(this.distanceTotal, distanceTotalSecond);
-              console.log((this.distanceTotal + distanceTotalSecond) / 100);
-              if (this.settings.delivery_price_rate.kilometers.use === true) {
-                this.amount = ((this.distanceTotal / 100) * this.settings.delivery_price_rate.kilometers.rate).toFixed(2)
-                this.amount = this.amount + ((distanceTotalSecond / 100) * this.settings.delivery_price_rate.kilometers.rate).toFixed(2)
-              } else {
-                this.amount = ((this.distanceTotal / 100) * 85).toFixed(2)
-                this.amount = this.amount +  ((distanceTotalSecond / 100) * this.settings.delivery_price_rate.kilometers.rate).toFixed(2)
-              }
-              if (this.settings.delivery_price_rate.time.use === true) {
-                this.amount = ((this.distanceTotal / 100) * this.settings.delivery_price_rate.time.rate).toFixed(2)
-                this.amount = this.amount +  ((distanceTotalSecond / 100) * this.settings.delivery_price_rate.time.rate).toFixed(2)
-              } else {
-                this.amount = (((this.distanceTotal + distanceTotalSecond) / 100) * 85).toFixed(2)
-                this.amount = this.amount +  ((distanceTotalSecond / 100) * this.settings.delivery_price_rate.time.rate).toFixed(2)
-              }
-            })
+      const arrFiltered = this.otherDestinations.filter(el => {
+        return el != null && el != '';
+      });
+      let listOfDestinations = [this.finaldestination, ...arrFiltered]
+      console.log(listOfDestinations)
+      let nextStopLocate = "";
+      let pickUpLocate = this.finalPickUp;
+      for (let i = 0; i < listOfDestinations.length; i++)  {
+        if (typeof listOfDestinations[i] === 'object') {
+          nextStopLocate = nextStopLocate + '|' + listOfDestinations[i]['formatted_address']
         } else {
-          this.distanceTotal = response.data['rows'][0]['elements']['0']['distance']['value'];
-          console.log("dfsafskdj");
-          if (this.settings.delivery_price_rate.kilometers.use === true) {
-            this.amount = ((this.distanceTotal / 100) * this.settings.delivery_price_rate.kilometers.rate).toFixed(2)
-          } else {
-            this.amount = ((this.distanceTotal / 100) * 85).toFixed(2)
-          }
-          if (this.settings.delivery_price_rate.time.use === true) {
-            this.amount = ((this.distanceTotal / 100) * this.settings.delivery_price_rate.time.rate).toFixed(2)
-          } else {
-            this.amount = ((this.distanceTotal / 100) * 85).toFixed(2)
-          }
+          nextStopLocate = nextStopLocate + '|' + listOfDestinations[i]
         }
-      })
-      .finally(() => this.loading = false);
+      }
+      const finalUrl = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${pickUpLocate}&destinations=${nextStopLocate}&key=AIzaSyCNL1Mzob3HzKiPtt9nB4su5XXxr_JqGik`;
+      httpClient.post("orders/calculate/distance", {
+          url: finalUrl
+        })
+            .then(response => {
+                console.log(response);
+                let allDistance = response.data['rows'][0]['elements']
+                let totalTime = 0
+                for (let i = 0; i < allDistance.length; i++) {
+                  this.distanceTotal = this.distanceTotal + allDistance[i]['distance']['value']
+                  totalTime = totalTime + allDistance[i]['duration']['value'];
+                }
+                console.log(this.distanceTotal, totalTime)
+                console.log(this.settings.delivery_price_rate.kilometers)
+                console.log(this.settings.delivery_price_rate.time)
+                if (this.settings.delivery_price_rate.kilometers.use === true) {
+                  this.amount += ((this.distanceTotal / 100) * this.settings.delivery_price_rate.kilometers.rate)
+                  console.log(this.amount, "amount")
+                  console.log((this.distanceTotal / 100) * this.settings.delivery_price_rate.kilometers.rate)
+                  console.log(
+                      ((this.distanceTotal / 100) * this.settings.delivery_price_rate.kilometers.rate)
+                  )
+                } else {
+                  this.amount += ((this.distanceTotal / 100) * 85)
+                }
+                if (this.settings.delivery_price_rate.time.use === true) {
+                  this.amount += (this.distanceTotal / 100) * this.settings.delivery_price_rate.time.rate
+                  console.log((this.distanceTotal / 100) * this.settings.delivery_price_rate.time.rate)
+                  console.log(this.amount, "amount")
+                } else {
+                  // this.amount = this.amount +  ((distanceTotalSecond / 100) * this.settings.delivery_price_rate.time.rate).toFixed(2)
+                }
+            })
+            .finally(() => this.loading = false);
     },
     estimation() {
       if (this.checkForStep2()) {
         this.calculate();
+        console.log(this.amount)
         this.changeStep('next')
       }
     },
     checkDetails() {
       if (this.checkForStep2()) {
         this.calculate();
+        console.log(this.amount)
         this.changeStep('next')
       }
     },
