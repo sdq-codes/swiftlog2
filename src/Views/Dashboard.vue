@@ -1223,15 +1223,11 @@ name: "Dashboard",
                   console.log(
                       ((this.distanceTotal / 100) * this.settings.delivery_price_rate.kilometers.rate)
                   )
-                } else {
-                  this.amount += ((this.distanceTotal / 100) * 85)
                 }
                 if (this.settings.delivery_price_rate.time.use === true) {
                   this.amount += (this.distanceTotal / 100) * this.settings.delivery_price_rate.time.rate
                   console.log((this.distanceTotal / 100) * this.settings.delivery_price_rate.time.rate)
                   console.log(this.amount, "amount")
-                } else {
-                  // this.amount = this.amount +  ((distanceTotalSecond / 100) * this.settings.delivery_price_rate.time.rate).toFixed(2)
                 }
             })
             .finally(() => this.loading = false);
