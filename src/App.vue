@@ -16,8 +16,8 @@ export default {
       localStorage.setItem('settings', config)
     })
   },
-  components: {
-  }
+
+  components: {}
 }
 </script>
 
