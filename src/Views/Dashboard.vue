@@ -252,7 +252,7 @@
                 <img src="../assets/images/directionname.svg" width="60" class="px-2 mb-auto pt-8" alt="">
                 <h4 class="ml-auto px-3 pt-6"
                     style="color: #64245C; font-size: 1.2rem"
-                >&#8358;{{ ((distanceTotal / 100) * 85).toFixed(2)}}</h4>
+                >&#8358;{{ amount.toFixed(2)}}</h4>
               </div>
               <h5
                   class="font-bold text-center text-base mb-3 btn-secondary mt-6 ml-auto w-12/12 py-3 font-medium"
@@ -1217,25 +1217,24 @@ name: "Dashboard",
                 console.log(this.settings.delivery_price_rate.kilometers)
                 console.log(this.settings.delivery_price_rate.time)
                 if (this.settings.delivery_price_rate.kilometers.use === true) {
-                  this.amount += ((this.distanceTotal / 100) * this.settings.delivery_price_rate.kilometers.rate)
+                  this.amount = ((this.distanceTotal / 1000) * this.settings.delivery_price_rate.kilometers.rate)
                   console.log(this.amount, "amount")
-                  console.log((this.distanceTotal / 100) * this.settings.delivery_price_rate.kilometers.rate)
+                  console.log((this.distanceTotal / 1000) * this.settings.delivery_price_rate.kilometers.rate)
                   console.log(
-                      ((this.distanceTotal / 100) * this.settings.delivery_price_rate.kilometers.rate)
+                      ((this.distanceTotal / 1000) * this.settings.delivery_price_rate.kilometers.rate)
                   )
                 }
                 if (this.settings.delivery_price_rate.time.use === true) {
-                  this.amount += (this.distanceTotal / 100) * this.settings.delivery_price_rate.time.rate
-                  console.log((this.distanceTotal / 100) * this.settings.delivery_price_rate.time.rate)
-                  console.log(this.amount, "amount")
+                  this.amount = this.amount + (totalTime * this.settings.delivery_price_rate.time.rate)
+                  console.log(this.amount, "time")
                 }
+                console.log(this.amount, "final Amount")
             })
             .finally(() => this.loading = false);
     },
     estimation() {
       if (this.checkForStep2()) {
         this.calculate();
-        console.log(this.amount)
         this.changeStep('next')
       }
     },
