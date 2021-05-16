@@ -1201,7 +1201,7 @@ name: "Dashboard",
           nextStopLocate = nextStopLocate + '|' + listOfDestinations[i]
         }
       }
-      const finalUrl = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${pickUpLocate}&destinations=${nextStopLocate}&key=AIzaSyCNL1Mzob3HzKiPtt9nB4su5XXxr_JqGik`;
+      const finalUrl = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${pickUpLocate}&destinations=${nextStopLocate}&mode=driving&key=AIzaSyCNL1Mzob3HzKiPtt9nB4su5XXxr_JqGik`;
       console.log(finalUrl)
       httpClient.post("orders/calculate/distance", {
           url: finalUrl
