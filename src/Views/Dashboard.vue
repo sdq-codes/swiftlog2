@@ -148,7 +148,7 @@
               Next
             </button>
           </div>
-          <div v-show="step === 1 ">
+          <div v-show="step === 1">
             <article
                 class="text-white text-left pb-5 rounded-lg px-8 pb-6 pt-6"
                 style="background-color: white; color: black; cursor: default; box-shadow: rgba(96, 100, 112, 0.4) 0 0 35.0956px;"
@@ -172,7 +172,7 @@
               </div>
               <div class="flex">
                 <img src="../assets/images/purpleRectangle.svg" height="23" class="pl-1 mb-0" width="22" alt="">
-                <GMap v-if="!editPrevioudDestination" @changeInValue="setDestination" gmap-class-map="pt-1 pl-3 pr-4" />
+                <GMap :key="componentKey" v-if="!editPrevioudDestination" @changeInValue="setDestination" gmap-class-map="pt-1 pl-3 pr-4" />
                 <div v-else>
                   <h5 class="mb-auto w-9/12 pt-1 pl-3 pr-4">
                     <span
@@ -842,6 +842,7 @@ name: "Dashboard",
   data() {
     return {
       settings: [],
+      componentKey: 0,
       name: "",
       refFinal: "",
       startLocation: {
@@ -949,6 +950,9 @@ name: "Dashboard",
     this.nownowtime = valid;
   },
   methods: {
+    forceRerender() {
+      this.componentKey += 1;
+    },
     changeNumberOfOrders() {
       if (this.numberOfOrders < this.maxOrders) {
         this.numberOfOrders = this.numberOfOrders + 1;
@@ -1019,6 +1023,7 @@ name: "Dashboard",
           status: "cancelled"
         })
       }
+      this.forceRerender()
       this.name= ""
       this.deliveryType = ""
       this.startLocation= {
