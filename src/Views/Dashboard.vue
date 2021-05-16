@@ -78,10 +78,13 @@
     </div>
     <Header :name="name" />
     <div v-if="settings.accepting_orders === true && nownowtime" class="address mt-16 flex justify-center">
-      <div @click="step = step - 1" v-if="step > 0 & step < 6" class="arrow-back flex justify-content-center px-5">
+      <div @click="step = step - 1" v-if="step > 0 & step < 6 && step !== 1" class="arrow-back flex justify-content-center px-5">
         <img src="../assets/images/arrow-back-outline.svg" alt="">
       </div>
       <div @click="rerendet" v-else-if="step === 6" class="arrow-back flex justify-content-center px-5">
+        <img src="../assets/images/arrow-back-outline.svg" alt="">
+      </div>
+      <div @click="rerendet" v-else-if="() => {step === 1; rerendet()}" class="arrow-back flex justify-content-center px-5">
         <img src="../assets/images/arrow-back-outline.svg" alt="">
       </div>
       <div @click="$router.go(-1)" v-else class="arrow-back flex justify-content-center px-5">
@@ -252,7 +255,7 @@
                 <img src="../assets/images/directionname.svg" width="60" class="px-2 mb-auto pt-8" alt="">
                 <h4 class="ml-auto px-3 pt-6"
                     style="color: #64245C; font-size: 1.2rem"
-                >&#8358;{{ amount.toFixed(2)}}</h4>
+                >&#8358;{{ amount.toFixed(2) }}</h4>
               </div>
               <h5
                   class="font-bold text-center text-base mb-3 btn-secondary mt-6 ml-auto w-12/12 py-3 font-medium"
@@ -427,7 +430,7 @@
                 <img src="../assets/images/directionname.svg" width="60" class="px-2 mb-auto pt-8" alt="">
                 <h2 class="ml-auto px-3 pt-6"
                     style="color: #64245C; font-size: 1.2rem"
-                >&#8358;{{ ((distanceTotal / 100) * 85).toFixed(2) }}</h2>
+                >&#8358;{{ amount.toFixed(2) }}</h2>
               </div>
               <div>
                 <label for="s2"
@@ -1010,8 +1013,8 @@ name: "Dashboard",
       }
       this.editPrevioudDestination = !this.editPrevioudDestination;
     },
-    rerendet() {
-      if (this.step === 6) {
+    rerendet(doCancel = true) {
+      if (this.step === 6 && doCancel) {
         httpClient.put(`orders/${this.order.id}`, {
           status: "cancelled"
         })
@@ -1043,6 +1046,8 @@ name: "Dashboard",
       this.finalPickUp= []
       this.finaldestination= []
       this.distanceTotal= 0
+      this.amount= 0
+      this.numberOfOrders= 0
       this.loading= false
       this.receipientName= ""
       this.receipientTel= ""
@@ -1065,7 +1070,7 @@ name: "Dashboard",
       this.loading = true
       const dataForm = {
         address_text: this.finalPickUp,
-        price: ((this.distanceTotal / 100) * 85).toFixed(2),
+        price: this.amount.toFixed(2),
         schedule: this.schedule,
         payment_status: payment_status,
         payment_method: this.payment_method,
@@ -1141,7 +1146,7 @@ name: "Dashboard",
                     "Your order status is now " + e.order.status,
                     "warning"
                 )
-                this.rerendet()
+                this.rerendet(false)
                 this.step = 0;
               } else {
                 this.newOrderDetails = e;
