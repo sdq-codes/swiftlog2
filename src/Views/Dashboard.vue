@@ -488,7 +488,7 @@
               <h5
                   style="font-family: 'Airbnb Cereal App Bold'; font-size: 1.3rem; line-height: 44px;"
                   class="text-center mt-3 mb-6">Searching for dispatch</h5>
-              <img @click="rerendet" src="../assets/images/cancelRide.svg" alt="" width="64px" class="ml-auto mr-auto">
+              <img @click="rerendet"  src="../assets/images/cancelRide.svg" alt="" width="64px" class="ml-auto mr-auto">
               <h6
                   style="font-family: 'Airbnb Cereal App Medium'; font-size: 18px; font-weight: 500; cursor: pointer"
                   class="text-center mt-10"
@@ -1206,6 +1206,8 @@ name: "Dashboard",
           url: finalUrl
         })
             .then(response => {
+                this.amount = 0
+                this.distanceTotal = 0
                 console.log(response);
                 let allDistance = response.data['rows'][0]['elements']
                 let totalTime = 0
