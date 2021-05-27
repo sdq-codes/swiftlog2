@@ -1082,11 +1082,11 @@ name: "Dashboard",
       }
       if (this.editPickUp) {
         if (this.destination.geometry.location.lat instanceof Function) {
-          dataForm['address_lat'] = this.place.geometry.viewport.Ra['i']
-          dataForm['address_lng'] = this.place.geometry.viewport.Wa['i']
+          dataForm['address_lat'] = 3.33333
+          dataForm['address_lng'] = 3.33333
         } else {
-          dataForm['address_lat'] = this.place.geometry.location.lat
-          dataForm['address_lng'] = this.place.geometry.location.lng
+          dataForm['address_lat'] = 3.33333
+          dataForm['address_lng'] = 3.33333
         }
       }
       if (this.schedule) {

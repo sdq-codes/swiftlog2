@@ -83,13 +83,12 @@
                       autocomplete="on"
                   >
                 </div>
-
                 <span slot="item" slot-scope="{ place }" class="block p-2">
-        {{ place.description }}
-      </span>
+                  {{ place.description }}
+                </span>
                 <span slot="activeItem" slot-scope="{ place }" class="block p-2 rounded bg-green-lightest font-bold">
-        {{ place.description }}
-      </span>
+                  {{ place.description }}
+                </span>
               </google-places-autocomplete>
 
               <div>
@@ -343,6 +342,25 @@ section {
   outline: none;
   transform: translateY(3px);
   box-shadow: 0 5px 10px rgba(#000000, 0.2) !important;
+}
+
+.google-input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: #464a4c;
+  background-color: #fff;
+  background-image: none;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+  -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
 }
 
 .btn-test:hover {
