@@ -430,7 +430,7 @@
                 <img src="../assets/images/directionname.svg" width="60" class="px-2 mb-auto pt-8" alt="">
                 <h2 class="ml-auto px-3 pt-6"
                     style="color: #64245C; font-size: 1.2rem"
-                >&#8358;{{ amount.toFixed(2) }}</h2>
+                ><span class="font-bold">({{coupon.discount}}% off)</span> &#8358;{{ amount.toFixed(2) }}</h2>
               </div>
               <div>
                 <label for="s2"
@@ -903,6 +903,7 @@ name: "Dashboard",
       nownowtime: "",
       maxOrders: 0,
       numberOfOrders: 0,
+      coupon: null,
       otherDestinations: []
     }
   },
@@ -1058,6 +1059,7 @@ name: "Dashboard",
       this.receipientTel= ""
       this.category= ""
       this.calender= null
+      this.coupon= null
       this.schedule= false
       this.fragile= false
       this.started();
@@ -1188,11 +1190,35 @@ name: "Dashboard",
             return false
           }
         }
-      }
-      if (operation === 'next') {
-        this.step += 1
-      } else if (operation === 'minus') {
-        this.step -= 1
+        this.loading = true;
+        httpClient.get('usercoupon')
+        .then(response => {
+          let GivenDate = response.data.data.coupon.expiry_date;
+          let CurrentDate = new Date();
+          GivenDate = new Date(GivenDate);
+
+          if(GivenDate > CurrentDate){
+            this.coupon = response.data.data.coupon;
+            this.amount = this.amount - ((this.coupon.discount/100) * this.amount);
+          }
+          if (operation === 'next') {
+            this.step += 1
+          } else if (operation === 'minus') {
+            this.step -= 1
+          }
+        }).catch(() => {
+          if (operation === 'next') {
+            this.step += 1
+          } else if (operation === 'minus') {
+            this.step -= 1
+          }
+        }).finally(() => this.loading = false)
+      } else {
+        if (operation === 'next') {
+          this.step += 1
+        } else if (operation === 'minus') {
+          this.step -= 1
+        }
       }
     },
     calculate() {

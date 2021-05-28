@@ -195,7 +195,7 @@ name: "Register",
           "telephone": '234' + this.phone.replace(/\s/g, ''),
           "name": `${this.fname} ${this.lname}`,
           "address_text": this.place.formatted_address,
-          "address_latitude": 6.23847,
+          "address_latitude": "",
           "address_longitude": 6.23847,
         })
         .then(response => {
