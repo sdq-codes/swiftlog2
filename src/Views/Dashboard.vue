@@ -430,7 +430,7 @@
                 <img src="../assets/images/directionname.svg" width="60" class="px-2 mb-auto pt-8" alt="">
                 <h2 class="ml-auto px-3 pt-6"
                     style="color: #64245C; font-size: 1.2rem"
-                ><span class="font-bold">({{coupon.discount}}% off)</span> &#8358;{{ amount.toFixed(2) }}</h2>
+                ><span v-if="coupon" class="font-bold">({{coupon.discount}}% off)</span> &#8358;{{ amount.toFixed(2) }}</h2>
               </div>
               <div>
                 <label for="s2"
@@ -928,6 +928,9 @@ name: "Dashboard",
           this.settings = JSON.parse(config);
           this.maxOrders = JSON.parse(config)['number_of_address'] -1;
         })
+        .catch(() => {
+          this.notify("An error occurred.")
+        })
   },
   mounted() {
     this.settings = JSON.parse(localStorage.getItem('settings'));
@@ -1168,7 +1171,9 @@ name: "Dashboard",
                 }
               }
             });
-      }).finally(() => this.loading = false)
+      })
+      .catch(() => this.notify('An error occurred. Please try again.', "error"))
+      .finally(() => this.loading = false)
     },
     changeStep(operation) {
       if (this.step === 3) {
@@ -1269,6 +1274,7 @@ name: "Dashboard",
                 }
                 console.log(this.amount, "final Amount")
             })
+            .catch(() => this.notify('An error occurred. Please try again.', "error"))
             .finally(() => this.loading = false);
     },
     estimation() {
@@ -1375,6 +1381,9 @@ name: "Dashboard",
         this.notify("Order cancelled", "success");
         this.$router.push({name: 'cancelled'})
       })
+      .catch(() => this.notify('An error occurred. Please try again.', "error"))
+      .finally(() => this.loading = false)
+
     },
     rateOrder(rate) {
       httpClient.post(`rate-order`, {
@@ -1385,6 +1394,8 @@ name: "Dashboard",
         this.rerendet();
         this.step = 0
       })
+      .catch(() => this.notify('An error occurred. Please try again.', "error"))
+      .finally(() => this.loading = false)
     }
   }
 }

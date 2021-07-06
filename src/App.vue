@@ -8,7 +8,6 @@
 import httpClient from "@/utils/api/httpClient";
 export default {
   name: 'App',
-
   mounted() {
     httpClient.get("settings")
     .then(response => {

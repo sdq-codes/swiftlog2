@@ -37,67 +37,67 @@
 
     </div>
 
-    <nav  className="block md:hidden">
-          <span className="text-xl text-white z-100 md:hidden"  @click.prevent="nav = !nav">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                v-if="nav === false"
-                class="md:hidden"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="32" height="32" x="0" y="0" viewBox="0 0 384 384" style="enable-background:new 0 0 512 512" xml:space="preserve"
-            >
-              <g>
-              <path
-                  xmlns="http://www.w3.org/2000/svg" d="m368 154.667969h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0" fill="#ffffff" data-original="#000000" style=""
-              />
-              <path
-                  xmlns="http://www.w3.org/2000/svg" d="m368 32h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0" fill="#ffffff" data-original="#000000" style=""
-              />
-              <path
-                  xmlns="http://www.w3.org/2000/svg" d="m368 277.332031h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0" fill="#ffffff" data-original="#000000" style=""
-              />
+    <nav  class="flex md:hidden">
+      <span class="text-xl text-white z-100 md:hidden"  @click.prevent="nav = !nav">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            v-if="nav === false"
+            class="md:hidden"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="32" height="32" x="0" y="0" viewBox="0 0 384 384" style="enable-background:new 0 0 512 512" xml:space="preserve"
+        >
+          <g>
+          <path
+              xmlns="http://www.w3.org/2000/svg" d="m368 154.667969h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0" fill="#ffffff" data-original="#000000" style=""
+          />
+          <path
+              xmlns="http://www.w3.org/2000/svg" d="m368 32h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0" fill="#ffffff" data-original="#000000" style=""
+          />
+          <path
+              xmlns="http://www.w3.org/2000/svg" d="m368 277.332031h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0" fill="#ffffff" data-original="#000000" style=""
+          />
+        </g>
+        </svg>
+        <svg v-else xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="32" height="32" x="0" y="0" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512 512" xml:space="preserve" class="md:hidden">
+          <g>
+          <g xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717    L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859    c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287    l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285    L284.286,256.002z" fill="#ffffff" data-original="#000000" style="" class=""/>
             </g>
-            </svg>
-            <svg v-else xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="32" height="32" x="0" y="0" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512 512" xml:space="preserve" class="md:hidden">
-              <g>
-              <g xmlns="http://www.w3.org/2000/svg">
-                <g>
-                  <path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717    L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859    c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287    l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285    L284.286,256.002z" fill="#ffffff" data-original="#000000" style="" class=""/>
-                </g>
-              </g>
-              <g xmlns="http://www.w3.org/2000/svg">
-              </g>
-              <g xmlns="http://www.w3.org/2000/svg">
-              </g>
-              <g xmlns="http://www.w3.org/2000/svg">
-              </g>
-              <g xmlns="http://www.w3.org/2000/svg">
-              </g>
-              <g xmlns="http://www.w3.org/2000/svg">
-              </g>
-              <g xmlns="http://www.w3.org/2000/svg">
-              </g>
-              <g xmlns="http://www.w3.org/2000/svg">
-              </g>
-              <g xmlns="http://www.w3.org/2000/svg">
-              </g>
-              <g xmlns="http://www.w3.org/2000/svg">
-              </g>
-              <g xmlns="http://www.w3.org/2000/svg">
-              </g>
-              <g xmlns="http://www.w3.org/2000/svg">
-              </g>
-              <g xmlns="http://www.w3.org/2000/svg">
-              </g>
-              <g xmlns="http://www.w3.org/2000/svg">
-              </g>
-              <g xmlns="http://www.w3.org/2000/svg">
-              </g>
-              <g xmlns="http://www.w3.org/2000/svg">
-              </g>
-            </g>
-            </svg>
-          </span>
+          </g>
+          <g xmlns="http://www.w3.org/2000/svg">
+          </g>
+          <g xmlns="http://www.w3.org/2000/svg">
+          </g>
+          <g xmlns="http://www.w3.org/2000/svg">
+          </g>
+          <g xmlns="http://www.w3.org/2000/svg">
+          </g>
+          <g xmlns="http://www.w3.org/2000/svg">
+          </g>
+          <g xmlns="http://www.w3.org/2000/svg">
+          </g>
+          <g xmlns="http://www.w3.org/2000/svg">
+          </g>
+          <g xmlns="http://www.w3.org/2000/svg">
+          </g>
+          <g xmlns="http://www.w3.org/2000/svg">
+          </g>
+          <g xmlns="http://www.w3.org/2000/svg">
+          </g>
+          <g xmlns="http://www.w3.org/2000/svg">
+          </g>
+          <g xmlns="http://www.w3.org/2000/svg">
+          </g>
+          <g xmlns="http://www.w3.org/2000/svg">
+          </g>
+          <g xmlns="http://www.w3.org/2000/svg">
+          </g>
+          <g xmlns="http://www.w3.org/2000/svg">
+          </g>
+        </g>
+        </svg>
+      </span>
       <div v-if="nav"  class="fixed bg-white top-0 left-0 w-4/5 h-full md:hidden z-50 shadow p-3" style="opacity: 1; transform: translateX(0%);">
         <div class="relative h-screen w-5/5">
           <div class="absolute flex place-items-center justify-center flex-col nav-position">
@@ -131,6 +131,9 @@
             </ul>
           </div>
         </div>
+      </div>
+      <div class="w-1/5">
+
       </div>
     </nav>
   </header>
